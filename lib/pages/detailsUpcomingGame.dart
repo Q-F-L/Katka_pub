@@ -1,23 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 
-class DetailsUpcomingGame extends StatelessWidget {
+class DetailsUpcomingGame extends StatefulWidget {
   const DetailsUpcomingGame({super.key});
 
+  @override
+  State<DetailsUpcomingGame> createState() => _DetailsUpcomingGameState();
+}
+
+class _DetailsUpcomingGameState extends State<DetailsUpcomingGame> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         scrolledUnderElevation: 0,
-        title: const Text('Подробности прошедшей игры'),
+        title: const Text('Подробности предстоящей игры'),
         backgroundColor: Color.fromARGB(255, 41, 42, 44),
       ),
       backgroundColor: Theme.of(context).backgroundColor,
       body: ListView(
         children: [
           Container(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
             child: Column(
               children: [
                 const SizedBox(
@@ -91,7 +96,7 @@ class DetailsUpcomingGame extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    '2 место',
+                    'Статус',
                     style: TextStyle(
                       fontFamily: "Inter",
                       fontSize: 16,
@@ -168,6 +173,92 @@ class DetailsUpcomingGame extends StatelessWidget {
                 ),
                 SizedBox(
                   height: 24,
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  height: MediaQuery.of(context).size.width * 0.5,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.grey),
+                  child: Image.asset(
+                    'assets/png/qr_code.png',
+                  ),
+                ),
+                SizedBox(
+                  height: 24,
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ButtonStyle(
+                    minimumSize: MaterialStateProperty.all(Size.fromHeight(50)),
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                    backgroundColor: MaterialStateColor.resolveWith(
+                        (states) => Color.fromARGB(255, 246, 188, 29)),
+                  ),
+                  child: const Text(
+                    "Отменить запись",
+                    style: TextStyle(
+                      fontFamily: "Inter",
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                      color: Color.fromARGB(255, 77, 31, 0),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 24,
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ButtonStyle(
+                    minimumSize: MaterialStateProperty.all(Size.fromHeight(50)),
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                    backgroundColor: MaterialStateColor.resolveWith(
+                        (states) => Color(0xFF292A2C)),
+                  ),
+                  child: const Text(
+                    "Ожидание принятия заявки",
+                    style: TextStyle(
+                      fontFamily: "Inter",
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 24,
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ButtonStyle(
+                    minimumSize: MaterialStateProperty.all(Size.fromHeight(50)),
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                    backgroundColor: MaterialStateColor.resolveWith(
+                        (states) => Color(0xFFFF4646)),
+                  ),
+                  child: const Text(
+                    "Ваша заявка отклонена",
+                    style: TextStyle(
+                      fontFamily: "Inter",
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ],
             ),

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:katka/components/src/CityDropdownButtonFromField.dart';
 // import 'package:katka/components/src/dropdownButtonFromField.dart';
 
-class SignOut extends StatefulWidget {
-  const SignOut({super.key});
+class CreateNewAdmin extends StatefulWidget {
+  const CreateNewAdmin({super.key});
 
   @override
-  State<SignOut> createState() => _SignOutState();
+  State<CreateNewAdmin> createState() => _CreateNewAdminState();
 }
 
-class _SignOutState extends State<SignOut> {
+class _CreateNewAdminState extends State<CreateNewAdmin> {
   List<String> list = ['Список', 'Список1', 'Список2', 'Список3'];
 
   @override
@@ -23,10 +23,6 @@ class _SignOutState extends State<SignOut> {
       body: Form(
         child: ListView(
           children: [
-            SizedBox(
-              height: 12,
-            ),
-            addImage(),
             SizedBox(
               height: 12,
             ),
@@ -80,7 +76,7 @@ class _SignOutState extends State<SignOut> {
                       borderSide: BorderSide.none),
                   filled: true,
                   fillColor: Color.fromARGB(255, 41, 42, 44),
-                  hintText: "Повторите пароль",
+                  hintText: "Мобильный телефон",
                   hintStyle: TextStyle(
                     color: Color.fromARGB(255, 164, 165, 167),
                     fontFamily: "Inter",
@@ -90,11 +86,7 @@ class _SignOutState extends State<SignOut> {
               ),
             ),
             SizedBox(
-              height: 12,
-            ),
-            dropButtonFromField(list, "Команды"),
-            SizedBox(
-              height: 24,
+              height: MediaQuery.of(context).size.height * 0.17,
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -111,7 +103,7 @@ class _SignOutState extends State<SignOut> {
                       (states) => Color.fromARGB(255, 246, 188, 29)),
                 ),
                 child: const Text(
-                  "Зарегистрироваться",
+                  "Создать администратора",
                   style: TextStyle(
                     fontFamily: "Inter",
                     fontSize: 16,
@@ -121,44 +113,9 @@ class _SignOutState extends State<SignOut> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 24,
-            ),
           ],
         ),
       ),
-    );
-  }
-
-  Widget addImage() {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16),
-      width: 343,
-      height: 248,
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(8)),
-        color: Color.fromRGBO(41, 42, 44, 1),
-      ),
-      child: IconButton(
-          onPressed: () {},
-          icon: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                'assets/png/plus.png',
-                scale: 0.8,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                'Загрузить фото',
-                style: TextStyle(
-                  color: Color(0xFFA4A5A7),
-                ),
-              ),
-            ],
-          )),
     );
   }
 
@@ -184,7 +141,6 @@ class _SignOutState extends State<SignOut> {
         ),
         onChanged: (data) {
           print(data);
-         
         },
         decoration: InputDecoration(
           fillColor: Color.fromARGB(255, 41, 42, 44),

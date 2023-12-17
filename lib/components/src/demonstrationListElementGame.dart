@@ -6,7 +6,7 @@ Widget demonstrationListElementGame(BuildContext context,
     String date = 'Дата',
     String location = "Место проведения",
     String counterPlayer = "21/100",
-    String mode = "Хардкор, Одиночная",
+    String mode = "Активные в игре режимы",
     String state = 'Статус'}) {
   return Row(
     children: [

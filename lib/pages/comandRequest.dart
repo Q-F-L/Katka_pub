@@ -26,169 +26,105 @@ class _listComandRequest extends State<listComandRequest> {
             const SizedBox(
               height: 8,
             ),
-            TextButton(
-              style: ButtonStyle(
-                elevation: MaterialStateProperty.all(0),
-                padding:
-                    MaterialStateProperty.all(EdgeInsets.fromLTRB(0, 0, 0, 4)),
-              ),
-              onPressed: () {},
-              child: listElementComandRequest(context),
-            ),
+            elementList(),
             const Divider(color: Color(0xFFA4A5A7)),
-            TextButton(
-              style: ButtonStyle(
-                elevation: MaterialStateProperty.all(0),
-                padding:
-                    MaterialStateProperty.all(EdgeInsets.fromLTRB(0, 8, 0, 4)),
-              ),
-              onPressed: () {},
-              child: listElementComandRequest(context),
+            const SizedBox(
+              height: 8,
             ),
-            Divider(color: Color(0xFFA4A5A7)),
-            TextButton(
-              style: ButtonStyle(
-                elevation: MaterialStateProperty.all(0),
-                padding:
-                    MaterialStateProperty.all(EdgeInsets.fromLTRB(0, 8, 0, 4)),
-              ),
-              onPressed: () {},
-              child: listElementComandRequest(context),
+            elementList(),
+            const Divider(color: Color(0xFFA4A5A7)),
+            const SizedBox(
+              height: 8,
             ),
-            Divider(color: Color(0xFFA4A5A7)),
-            TextButton(
-              style: ButtonStyle(
-                elevation: MaterialStateProperty.all(0),
-                padding:
-                    MaterialStateProperty.all(EdgeInsets.fromLTRB(0, 8, 0, 4)),
-              ),
-              onPressed: () {},
-              child: listElementComandRequest(context),
+            elementList(),
+            const Divider(color: Color(0xFFA4A5A7)),
+            const SizedBox(
+              height: 8,
             ),
-            Divider(color: Color(0xFFA4A5A7)),
-            TextButton(
-              style: ButtonStyle(
-                elevation: MaterialStateProperty.all(0),
-                padding:
-                    MaterialStateProperty.all(EdgeInsets.fromLTRB(0, 8, 0, 4)),
-              ),
-              onPressed: () {},
-              child: listElementComandRequest(context),
+            elementList(),
+            const Divider(color: Color(0xFFA4A5A7)),
+            const SizedBox(
+              height: 8,
             ),
-            Divider(color: Color(0xFFA4A5A7)),
-            TextButton(
-              style: ButtonStyle(
-                elevation: MaterialStateProperty.all(0),
-                padding:
-                    MaterialStateProperty.all(EdgeInsets.fromLTRB(0, 8, 0, 4)),
-              ),
-              onPressed: () {},
-              child: listElementComandRequest(context),
+            elementList(),
+            const Divider(color: Color(0xFFA4A5A7)),
+            const SizedBox(
+              height: 8,
             ),
-            Divider(color: Color(0xFFA4A5A7)),
-            TextButton(
-              style: ButtonStyle(
-                elevation: MaterialStateProperty.all(0),
-                padding:
-                    MaterialStateProperty.all(EdgeInsets.fromLTRB(0, 8, 0, 4)),
-              ),
-              onPressed: () {},
-              child: listElementComandRequest(context),
-            ),
-            Divider(color: Color(0xFFA4A5A7)),
-            TextButton(
-              style: ButtonStyle(
-                elevation: MaterialStateProperty.all(0),
-                padding:
-                    MaterialStateProperty.all(EdgeInsets.fromLTRB(0, 8, 0, 4)),
-              ),
-              onPressed: () {},
-              child: listElementComandRequest(context),
-            ),
-            Divider(color: Color(0xFFA4A5A7)),
-            TextButton(
-              style: ButtonStyle(
-                elevation: MaterialStateProperty.all(0),
-                padding:
-                    MaterialStateProperty.all(EdgeInsets.fromLTRB(0, 8, 0, 4)),
-              ),
-              onPressed: () {},
-              child: listElementComandRequest(context),
-            ),
-            Divider(color: Color(0xFFA4A5A7)),
-            TextButton(
-              style: ButtonStyle(
-                elevation: MaterialStateProperty.all(0),
-                padding:
-                    MaterialStateProperty.all(EdgeInsets.fromLTRB(0, 8, 0, 4)),
-              ),
-              onPressed: () {},
-              child: listElementComandRequest(context),
-            ),
-            Divider(color: Color(0xFFA4A5A7)),
-            TextButton(
-              style: ButtonStyle(
-                elevation: MaterialStateProperty.all(0),
-                padding:
-                    MaterialStateProperty.all(EdgeInsets.fromLTRB(0, 8, 0, 4)),
-              ),
-              onPressed: () {},
-              child: listElementComandRequest(context),
-            ),
-            Divider(color: Color(0xFFA4A5A7)),
-            TextButton(
-              style: ButtonStyle(
-                elevation: MaterialStateProperty.all(0),
-                padding:
-                    MaterialStateProperty.all(EdgeInsets.fromLTRB(0, 8, 0, 4)),
-              ),
-              onPressed: () {},
-              child: listElementComandRequest(context),
-            ),
-            Divider(color: Color(0xFFA4A5A7)),
-            TextButton(
-              style: ButtonStyle(
-                elevation: MaterialStateProperty.all(0),
-                padding:
-                    MaterialStateProperty.all(EdgeInsets.fromLTRB(0, 8, 0, 4)),
-              ),
-              onPressed: () {},
-              child: listElementComandRequest(context),
-            ),
-            Divider(color: Color(0xFFA4A5A7)),
-            TextButton(
-              style: ButtonStyle(
-                elevation: MaterialStateProperty.all(0),
-                padding:
-                    MaterialStateProperty.all(EdgeInsets.fromLTRB(0, 8, 0, 4)),
-              ),
-              onPressed: () {},
-              child: listElementComandRequest(context),
-            ),
-            Divider(color: Color(0xFFA4A5A7)),
-            TextButton(
-              style: ButtonStyle(
-                elevation: MaterialStateProperty.all(0),
-                padding:
-                    MaterialStateProperty.all(EdgeInsets.fromLTRB(0, 8, 0, 4)),
-              ),
-              onPressed: () {},
-              child: listElementComandRequest(context),
-            ),
-            Divider(color: Color(0xFFA4A5A7)),
-            TextButton(
-              style: ButtonStyle(
-                elevation: MaterialStateProperty.all(0),
-                padding:
-                    MaterialStateProperty.all(EdgeInsets.fromLTRB(0, 8, 0, 4)),
-              ),
-              onPressed: () {},
-              child: listElementComandRequest(context),
-            ),
-            Divider(color: Color(0xFFA4A5A7)),
+            elementList(),
+            const Divider(color: Color(0xFFA4A5A7)),
           ],
         ),
       ),
+    );
+  }
+
+  Widget elementList() {
+    return TextButton(
+      style: ButtonStyle(
+        elevation: MaterialStateProperty.all(0),
+        padding: MaterialStateProperty.all(EdgeInsets.fromLTRB(0, 0, 0, 4)),
+      ),
+      onPressed: () => showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(8.0))),
+          elevation: 0,
+          actionsPadding: EdgeInsets.all(24),
+          backgroundColor: Color(0xFF292A2C),
+          actions: <Widget>[
+            ElevatedButton(
+              onPressed: () => Navigator.pop(context, 'Принять'),
+              child: Text(
+                "Принять",
+                style: TextStyle(
+                  fontFamily: "Inter",
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                  color: Color.fromARGB(255, 77, 31, 0),
+                ),
+              ),
+              style: ButtonStyle(
+                minimumSize: MaterialStateProperty.all(Size.fromHeight(50)),
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
+                backgroundColor: MaterialStateColor.resolveWith(
+                    (states) => Color.fromARGB(255, 246, 188, 29)),
+              ),
+            ),
+            SizedBox(
+              height: 12,
+            ),
+            ElevatedButton(
+              onPressed: () => Navigator.pop(context, 'Принять'),
+              child: Text(
+                "Отказать",
+                style: TextStyle(
+                  fontFamily: "Inter",
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                  color: Color.fromARGB(255, 77, 31, 0),
+                ),
+              ),
+              style: ButtonStyle(
+                minimumSize: MaterialStateProperty.all(Size.fromHeight(50)),
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
+                backgroundColor: MaterialStateColor.resolveWith(
+                    (states) => Color.fromARGB(255, 246, 188, 29)),
+              ),
+            ),
+          ],
+        ),
+      ),
+      child: listElementComandRequest(context),
     );
   }
 }

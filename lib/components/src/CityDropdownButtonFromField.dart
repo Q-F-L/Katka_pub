@@ -19,7 +19,7 @@ class _DdBFFCState extends State<DdBFFC> {
         borderRadius: BorderRadius.circular(8),
       ),
       child: DropdownButtonFormField(
-        menuMaxHeight: 10,
+        menuMaxHeight: 200,
         elevation: 0,
         borderRadius: BorderRadius.circular(8),
         dropdownColor: Color.fromARGB(255, 41, 42, 44),

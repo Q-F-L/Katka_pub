@@ -23,11 +23,14 @@ Widget rating(String pretext, BuildContext context) {
           Icons.stars,
           color: Color.fromARGB(255, 246, 188, 29),
         ),
-        Text(
-          '$pretext',
-          style: TextStyle(
-            color: Color.fromARGB(255, 255, 255, 255),
-            fontSize: 16,
+        Padding(
+          padding: const EdgeInsets.only(left: 4),
+          child: Text(
+            '$pretext',
+            style: TextStyle(
+              color: Color.fromARGB(255, 255, 255, 255),
+              fontSize: 16,
+            ),
           ),
         ),
       ],

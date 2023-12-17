@@ -18,9 +18,12 @@ class _PersonalAccount extends State<PersonalAccount> {
       ),
       backgroundColor: Theme.of(context).backgroundColor,
       body: Container(
-        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        padding: EdgeInsets.symmetric(horizontal: 16),
         child: ListView(
           children: [
+            SizedBox(
+              height: 12,
+            ),
             Container(
               alignment: Alignment.center,
               width: MediaQuery.of(context).size.width * 0.83,
@@ -442,6 +445,9 @@ class _PersonalAccount extends State<PersonalAccount> {
                       (states) => Color.fromARGB(255, 246, 188, 29)),
                 ),
               ),
+            ),
+            SizedBox(
+              height: 12,
             ),
           ],
         ),

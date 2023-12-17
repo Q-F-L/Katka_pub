@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:katka/components/src/CityDropdownButtonFromField.dart';
 // import 'package:katka/components/src/dropdownButtonFromField.dart';
 
-class SignOut extends StatefulWidget {
-  const SignOut({super.key});
+class EditUser extends StatefulWidget {
+  const EditUser({super.key});
 
   @override
-  State<SignOut> createState() => _SignOutState();
+  State<EditUser> createState() => _EditUserState();
 }
 
-class _SignOutState extends State<SignOut> {
+class _EditUserState extends State<EditUser> {
   List<String> list = ['Список', 'Список1', 'Список2', 'Список3'];
+  String selectedItem = 'Список';
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class _SignOutState extends State<SignOut> {
             SizedBox(
               height: 12,
             ),
-            addImage(),
+            editImage(),
             SizedBox(
               height: 12,
             ),
@@ -111,7 +112,35 @@ class _SignOutState extends State<SignOut> {
                       (states) => Color.fromARGB(255, 246, 188, 29)),
                 ),
                 child: const Text(
-                  "Зарегистрироваться",
+                  "Сохранить",
+                  style: TextStyle(
+                    fontFamily: "Inter",
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    color: Color.fromARGB(255, 77, 31, 0),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 12,
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: ElevatedButton(
+                onPressed: () {},
+                style: ButtonStyle(
+                  minimumSize: MaterialStateProperty.all(Size.fromHeight(50)),
+                  shape: MaterialStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                  backgroundColor: MaterialStateColor.resolveWith(
+                      (states) => Color.fromARGB(255, 246, 188, 29)),
+                ),
+                child: const Text(
+                  "Отменить",
                   style: TextStyle(
                     fontFamily: "Inter",
                     fontSize: 16,
@@ -130,36 +159,41 @@ class _SignOutState extends State<SignOut> {
     );
   }
 
-  Widget addImage() {
+  Widget editImage() {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16),
-      width: 343,
-      height: 248,
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(8)),
-        color: Color.fromRGBO(41, 42, 44, 1),
-      ),
-      child: IconButton(
-          onPressed: () {},
-          icon: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                'assets/png/plus.png',
-                scale: 0.8,
+        margin: const EdgeInsets.symmetric(horizontal: 16),
+        alignment: Alignment.center,
+        width: MediaQuery.of(context).size.width * 0.83,
+        height: MediaQuery.of(context).size.width * 0.6,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8), color: Colors.grey),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Container(
+              alignment: Alignment.center,
+              width: MediaQuery.of(context).size.width * 0.83,
+              height: MediaQuery.of(context).size.width * 0.6,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8), color: Colors.grey),
+              child: Image.asset(
+                'assets/png/avatar.png',
               ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                'Загрузить фото',
+            ),
+            TextButton(
+              onPressed: () {},
+              child: Text(
+                "Изменить фото",
                 style: TextStyle(
-                  color: Color(0xFFA4A5A7),
+                  color: Colors.white,
+                  fontFamily: "Inter",
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
-            ],
-          )),
-    );
+            )
+          ],
+        ));
   }
 
   Widget dropButtonFromField(List<String> list, String defaultValue) {
@@ -184,7 +218,9 @@ class _SignOutState extends State<SignOut> {
         ),
         onChanged: (data) {
           print(data);
-         
+          setState(() {
+            selectedItem = data as String;
+          });
         },
         decoration: InputDecoration(
           fillColor: Color.fromARGB(255, 41, 42, 44),

@@ -174,7 +174,7 @@ class _ComandState extends State<Comand> {
               height: 24,
             ),
             const Text(
-              'Прошедшие игры',
+              'Количество',
               style: TextStyle(color: Colors.white, fontSize: 20),
               textAlign: TextAlign.center,
             ),
