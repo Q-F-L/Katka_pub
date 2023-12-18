@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:katka/components/src/CityDropdownButtonFromField.dart';
+import 'package:katka/pages/personal_account.dart';
 // import 'package:katka/components/src/dropdownButtonFromField.dart';
 
 class SignOut extends StatefulWidget {
@@ -16,6 +17,15 @@ class _SignOutState extends State<SignOut> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.keyboard_arrow_left,
+            size: 35,
+          ),
+        ),
         title: Text('Регистрация'),
         backgroundColor: Color.fromARGB(255, 41, 42, 44),
       ),
@@ -99,7 +109,13 @@ class _SignOutState extends State<SignOut> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const PersonalAccount()),
+                  );
+                },
                 style: ButtonStyle(
                   minimumSize: MaterialStateProperty.all(Size.fromHeight(50)),
                   shape: MaterialStateProperty.all(
@@ -184,7 +200,6 @@ class _SignOutState extends State<SignOut> {
         ),
         onChanged: (data) {
           print(data);
-         
         },
         decoration: InputDecoration(
           fillColor: Color.fromARGB(255, 41, 42, 44),

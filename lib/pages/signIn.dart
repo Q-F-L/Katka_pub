@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:katka/pages/personal_account.dart';
 
 class SignIn extends StatelessWidget {
   const SignIn({super.key});
@@ -7,6 +8,15 @@ class SignIn extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.keyboard_arrow_left,
+            size: 35,
+          ),
+        ),
         title: Text('Вход'),
         backgroundColor: Color.fromARGB(255, 41, 42, 44),
       ),
@@ -62,7 +72,13 @@ class SignIn extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const PersonalAccount()),
+                  );
+                },
                 style: ButtonStyle(
                   minimumSize: MaterialStateProperty.all(Size.fromHeight(50)),
                   shape: MaterialStateProperty.all(

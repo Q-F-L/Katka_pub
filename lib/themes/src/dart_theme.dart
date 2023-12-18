@@ -2,7 +2,7 @@ part of '../theme.dart';
 
 ThemeData darkTheme() {
   return ThemeData(
-    backgroundColor: Color.fromRGBO(31, 32, 34, 1),
+    backgroundColor: Color.fromARGB(255, 29, 30, 31),
     // buttonTheme: const ButtonThemeData(
     //   colorScheme: ColorScheme(
     //     brightness: Brightness.dark,

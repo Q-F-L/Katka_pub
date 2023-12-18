@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:katka/pages/signIn.dart';
+import 'package:katka/pages/signOut.dart';
 
 class Auth extends StatelessWidget {
   const Auth({super.key});
@@ -6,7 +8,7 @@ class Auth extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(31, 32, 34, 1),
+      backgroundColor: Color.fromARGB(255, 29, 30, 31),
       body: Container(
         padding: EdgeInsets.symmetric(
             horizontal: MediaQuery.of(context).size.width * 0.04),
@@ -21,7 +23,12 @@ class Auth extends StatelessWidget {
             Flexible(
               flex: 2,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const SignIn()),
+                  );
+                },
                 child: Text(
                   "Вход",
                   style: TextStyle(
@@ -46,7 +53,12 @@ class Auth extends StatelessWidget {
             Flexible(
               flex: 1,
               child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const SignOut()),
+                    );
+                  },
                   child: Text(
                     'Регистарция',
                     style: TextStyle(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:katka/components/src/cordCustom.dart';
 import 'package:katka/components/src/rating.dart';
+import 'package:katka/pages/detailsLastGame.dart';
+import 'package:katka/pages/detailsUpcomingGame.dart';
 
 class Comand extends StatefulWidget {
   const Comand({super.key});
@@ -14,6 +16,15 @@ class _ComandState extends State<Comand> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.keyboard_arrow_left,
+            size: 35,
+          ),
+        ),
         elevation: 0,
         scrolledUnderElevation: 0,
         title: const Text('Подробности команды'),
@@ -27,28 +38,18 @@ class _ComandState extends State<Comand> {
             const SizedBox(
               height: 12,
             ),
-            Container(
-              alignment: Alignment.center,
+            Image.asset(
+              'assets/png/logo_team.png',
               width: MediaQuery.of(context).size.width * 0.83,
               height: MediaQuery.of(context).size.width * 0.6,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8), color: Colors.grey),
-              child: Image.asset(
-                'assets/png/logo_team.png',
-              ),
             ),
             const SizedBox(
               height: 12,
             ),
-            Container(
-              alignment: Alignment.center,
+            Image.asset(
+              'assets/png/img_team.png',
               width: MediaQuery.of(context).size.width * 0.83,
               height: MediaQuery.of(context).size.width * 0.6,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8), color: Colors.grey),
-              child: Image.asset(
-                'assets/png/img_team.png',
-              ),
             ),
             const SizedBox(
               height: 24,
@@ -181,56 +182,7 @@ class _ComandState extends State<Comand> {
             const SizedBox(
               height: 24,
             ),
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 24),
-              height: 200,
-              decoration: BoxDecoration(
-                  color: Color(0xFF292A2C),
-                  borderRadius: BorderRadius.circular(8)),
-              child: ListView(
-                clipBehavior: Clip.antiAlias,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                        flex: 2,
-                        child: const Text(
-                          'Ник участника',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            color: Colors.white,
-                            fontFamily: 'Inter',
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                      Flexible(
-                        fit: FlexFit.loose,
-                        flex: 2,
-                        child: const Row(
-                          children: [
-                            Icon(
-                              Icons.stars,
-                              color: Color.fromARGB(255, 246, 188, 29),
-                            ),
-                            Text(
-                              ' рейтинг 100',
-                              style: TextStyle(
-                                fontFamily: 'Inter',
-                                fontWeight: FontWeight.w400,
-                                color: Color.fromARGB(255, 255, 255, 255),
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+            listPlayer(),
             const SizedBox(
               height: 24,
             ),
@@ -242,107 +194,7 @@ class _ComandState extends State<Comand> {
             const SizedBox(
               height: 24,
             ),
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 24, horizontal: 24),
-              height: 200,
-              decoration: BoxDecoration(
-                  color: Color(0xFF292A2C),
-                  borderRadius: BorderRadius.circular(8)),
-              child: ListView(
-                clipBehavior: Clip.antiAlias,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Название игры',
-                        style: TextStyle(
-                          color: Color(0xFFA4A5A7),
-                          fontSize: 16,
-                        ),
-                      ),
-                      const Text(
-                        'Дата',
-                        style: TextStyle(
-                          color: Color(0xFFA4A5A7),
-                          fontSize: 16,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Активные в игре режимы',
-                        style: TextStyle(
-                          color: Color(0xFFA4A5A7),
-                          fontSize: 16,
-                        ),
-                      ),
-                      const Text(
-                        'Статус',
-                        style: TextStyle(
-                          color: Color(0xFFA4A5A7),
-                          fontSize: 16,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  const Divider(color: Colors.black),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Катка 1',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          fontSize: 16,
-                        ),
-                      ),
-                      const Text(
-                        '21.06.2024',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          fontSize: 16,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Аркада, Зомби',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          fontSize: 16,
-                        ),
-                      ),
-                      Text(
-                        '1',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          fontSize: 16,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+            listPredGame1(),
             SizedBox(
               height: 24,
             ),
@@ -354,107 +206,7 @@ class _ComandState extends State<Comand> {
             SizedBox(
               height: 12,
             ),
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 24, horizontal: 24),
-              height: 200,
-              decoration: BoxDecoration(
-                  color: Color(0xFF292A2C),
-                  borderRadius: BorderRadius.circular(8)),
-              child: ListView(
-                clipBehavior: Clip.antiAlias,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Название игры',
-                        style: TextStyle(
-                          color: Color(0xFFA4A5A7),
-                          fontSize: 16,
-                        ),
-                      ),
-                      Text(
-                        'Дата',
-                        style: TextStyle(
-                          color: Color(0xFFA4A5A7),
-                          fontSize: 16,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Активные в игре режимы',
-                        style: TextStyle(
-                          color: Color(0xFFA4A5A7),
-                          fontSize: 16,
-                        ),
-                      ),
-                      Text(
-                        'Статус',
-                        style: TextStyle(
-                          color: Color(0xFFA4A5A7),
-                          fontSize: 16,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  Divider(color: Colors.black),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Катка 1',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          fontSize: 16,
-                        ),
-                      ),
-                      Text(
-                        '21.06.2024',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          fontSize: 16,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Аркада, Зомби',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          fontSize: 16,
-                        ),
-                      ),
-                      Text(
-                        'Записан',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          fontSize: 16,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+            listPredGame2(),
             SizedBox(
               height: 24,
             ),
@@ -482,6 +234,403 @@ class _ComandState extends State<Comand> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget listPredGame1() {
+    var _scrollController = ScrollController();
+
+    return Container(
+      padding: EdgeInsets.only(right: 8, left: 24, top: 24, bottom: 24),
+      height: 200,
+      decoration: BoxDecoration(
+          color: Color(0xFF292A2C), borderRadius: BorderRadius.circular(8)),
+      child: Scrollbar(
+        controller: _scrollController,
+        thickness: 3,
+        thumbVisibility: true,
+        trackVisibility: true,
+        radius: Radius.circular(10),
+        child: ListView.builder(
+          controller: _scrollController,
+          itemCount: 10,
+          padding: EdgeInsets.only(right: 16),
+          clipBehavior: Clip.antiAlias,
+          itemBuilder: (context, index) {
+            if (index == 0) {
+              return Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Название игры',
+                        style: TextStyle(
+                          color: Color(0xFFA4A5A7),
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        'Дата',
+                        style: TextStyle(
+                          color: Color(0xFFA4A5A7),
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Активные в игре режимы',
+                        style: TextStyle(
+                          color: Color(0xFFA4A5A7),
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        'Статус',
+                        style: TextStyle(
+                          color: Color(0xFFA4A5A7),
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Divider(color: Color(0xFFA4A5A7)),
+                  SizedBox(
+                    height: 12,
+                  ),
+                ],
+              );
+            }
+            if (10 != index) {
+              return Column(
+                children: [
+                  PredGame1(),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Divider(color: Color(0xFFA4A5A7)),
+                  SizedBox(
+                    height: 12,
+                  ),
+                ],
+              );
+            }
+            return PredGame1();
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget PredGame1() {
+    return TextButton(
+      style: ButtonStyle(
+        elevation: MaterialStateProperty.all(0),
+        padding: MaterialStateProperty.all(EdgeInsets.all(0)),
+      ),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const DetailsLastGame()),
+        );
+      },
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Катка 1',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  fontFamily: "Inter",
+                  fontWeight: FontWeight.w400,
+                  fontSize: 16,
+                ),
+              ),
+              Text(
+                '21.06.2024',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  fontFamily: "Inter",
+                  fontWeight: FontWeight.w400,
+                  fontSize: 16,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 12,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Аркада, Зомби',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  fontFamily: "Inter",
+                  fontWeight: FontWeight.w400,
+                  fontSize: 16,
+                ),
+              ),
+              Text(
+                '1',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  fontFamily: "Inter",
+                  fontWeight: FontWeight.w400,
+                  fontSize: 16,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget listPredGame2() {
+    var _scrollController = ScrollController();
+
+    return Container(
+      padding: EdgeInsets.only(right: 8, left: 24, top: 24, bottom: 24),
+      height: 200,
+      decoration: BoxDecoration(
+          color: Color(0xFF292A2C), borderRadius: BorderRadius.circular(8)),
+      child: Scrollbar(
+        controller: _scrollController,
+        thickness: 3,
+        thumbVisibility: true,
+        trackVisibility: true,
+        radius: Radius.circular(10),
+        child: ListView.builder(
+          itemCount: 10,
+          controller: _scrollController,
+          padding: EdgeInsets.only(right: 16),
+          clipBehavior: Clip.antiAlias,
+          itemBuilder: (context, index) {
+            if (index == 0) {
+              return Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Название игры',
+                        style: TextStyle(
+                          color: Color(0xFFA4A5A7),
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        'Дата',
+                        style: TextStyle(
+                          color: Color(0xFFA4A5A7),
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Активные в игре режимы',
+                        style: TextStyle(
+                          color: Color(0xFFA4A5A7),
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        'Статус',
+                        style: TextStyle(
+                          color: Color(0xFFA4A5A7),
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Divider(color: Color(0xFFA4A5A7)),
+                  SizedBox(
+                    height: 12,
+                  ),
+                ],
+              );
+            }
+            if (10 != index) {
+              return Column(
+                children: [
+                  PredGame2(),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Divider(color: Color(0xFFA4A5A7)),
+                  SizedBox(
+                    height: 12,
+                  ),
+                ],
+              );
+            }
+            return PredGame1();
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget PredGame2() {
+    return TextButton(
+      style: ButtonStyle(
+        elevation: MaterialStateProperty.all(0),
+        padding: MaterialStateProperty.all(EdgeInsets.all(0)),
+      ),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const DetailsUpcomingGame()),
+        );
+      },
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Катка 1',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  fontFamily: "Inter",
+                  fontWeight: FontWeight.w400,
+                  fontSize: 16,
+                ),
+              ),
+              Text(
+                '21.06.2024',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  fontFamily: "Inter",
+                  fontWeight: FontWeight.w400,
+                  fontSize: 16,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 12,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Аркада, Зомби',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  fontFamily: "Inter",
+                  fontWeight: FontWeight.w400,
+                  fontSize: 16,
+                ),
+              ),
+              Text(
+                '1',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  fontFamily: "Inter",
+                  fontWeight: FontWeight.w400,
+                  fontSize: 16,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget listPlayer() {
+    var _scrollController = ScrollController();
+
+    return Container(
+      padding: EdgeInsets.only(right: 8, left: 24, top: 24, bottom: 24),
+      height: 200,
+      decoration: BoxDecoration(
+          color: Color(0xFF292A2C), borderRadius: BorderRadius.circular(8)),
+      child: Scrollbar(
+        controller: _scrollController,
+        thickness: 3,
+        thumbVisibility: true,
+        trackVisibility: true,
+        radius: Radius.circular(10),
+        child: ListView.builder(
+          itemCount: 10,
+          controller: _scrollController,
+          padding: EdgeInsets.only(right: 16),
+          clipBehavior: Clip.antiAlias,
+          itemBuilder: (context, index) {
+            return elementPlayer();
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget elementPlayer() {
+    return Container(
+      margin: EdgeInsets.only(bottom: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Flexible(
+            flex: 2,
+            child: const Text(
+              'Ник участника',
+              style: TextStyle(
+                fontWeight: FontWeight.w400,
+                color: Colors.white,
+                fontFamily: 'Inter',
+                fontSize: 16,
+              ),
+            ),
+          ),
+          Flexible(
+            fit: FlexFit.loose,
+            flex: 2,
+            child: const Row(
+              children: [
+                Icon(
+                  Icons.stars,
+                  color: Color.fromARGB(255, 246, 188, 29),
+                ),
+                Text(
+                  ' рейтинг 100',
+                  style: TextStyle(
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.w400,
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    fontSize: 16,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

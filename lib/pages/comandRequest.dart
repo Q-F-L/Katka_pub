@@ -15,6 +15,15 @@ class _listComandRequest extends State<listComandRequest> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.keyboard_arrow_left,
+            size: 35,
+          ),
+        ),
         title: const Text('Заявки на вступление в команду'),
         backgroundColor: const Color.fromARGB(255, 41, 42, 44),
       ),

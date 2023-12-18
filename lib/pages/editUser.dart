@@ -17,7 +17,16 @@ class _EditUserState extends State<EditUser> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Регистрация'),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.keyboard_arrow_left,
+            size: 35,
+          ),
+        ),
+        title: Text('Изменение личных данных пользателем'),
         backgroundColor: Color.fromARGB(255, 41, 42, 44),
       ),
       backgroundColor: Theme.of(context).backgroundColor,
@@ -160,40 +169,28 @@ class _EditUserState extends State<EditUser> {
   }
 
   Widget editImage() {
-    return Container(
-        margin: const EdgeInsets.symmetric(horizontal: 16),
-        alignment: Alignment.center,
-        width: MediaQuery.of(context).size.width * 0.83,
-        height: MediaQuery.of(context).size.width * 0.6,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8), color: Colors.grey),
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Container(
-              alignment: Alignment.center,
-              width: MediaQuery.of(context).size.width * 0.83,
-              height: MediaQuery.of(context).size.width * 0.6,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8), color: Colors.grey),
-              child: Image.asset(
-                'assets/png/avatar.png',
-              ),
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Image.asset(
+          'assets/png/avatar.png',
+          width: MediaQuery.of(context).size.width * 0.83,
+          height: MediaQuery.of(context).size.width * 0.6,
+        ),
+        TextButton(
+          onPressed: () {},
+          child: Text(
+            "Изменить фото",
+            style: TextStyle(
+              color: Colors.white,
+              fontFamily: "Inter",
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
             ),
-            TextButton(
-              onPressed: () {},
-              child: Text(
-                "Изменить фото",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: "Inter",
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-            )
-          ],
-        ));
+          ),
+        )
+      ],
+    );
   }
 
   Widget dropButtonFromField(List<String> list, String defaultValue) {

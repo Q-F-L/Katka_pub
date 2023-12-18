@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:katka/components/src/cordCustom.dart';
 import 'package:katka/components/src/listElement.dart';
+import 'package:katka/pages/admin/createNewAdmin.dart';
+import 'package:katka/pages/admin/detailAdmin.dart';
 
 class ListAdmins extends StatefulWidget {
   const ListAdmins({super.key});
@@ -57,6 +59,8 @@ class _ListAdmins extends State<ListAdmins> {
 
   @override
   Widget build(BuildContext context) {
+    bool width = MediaQuery.of(context).size.width > 420;
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         focusElevation: 0,
@@ -67,10 +71,25 @@ class _ListAdmins extends State<ListAdmins> {
         backgroundColor: Color(0xFF292A2C),
         elevation: 0,
         child: Image.asset('assets/png/plus.png'),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const CreateNewAdmin()),
+          );
+        },
       ),
       appBar: AppBar(
-        title: Text('Список команд'),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.keyboard_arrow_left,
+            size: 35,
+          ),
+        ),
+        centerTitle: width ? true : false,
+        title: Text('Администраторы'),
         backgroundColor: Color.fromARGB(255, 41, 42, 44),
       ),
       backgroundColor: Theme.of(context).backgroundColor,
@@ -90,7 +109,9 @@ class _ListAdmins extends State<ListAdmins> {
               ),
               showCheckboxColumn: false,
               horizontalMargin: 0,
-              columnSpacing: MediaQuery.of(context).size.width * 0.13,
+              columnSpacing: width
+                  ? MediaQuery.of(context).size.width * 0.2
+                  : MediaQuery.of(context).size.width * 0.1,
               border: const TableBorder(
                 bottom: BorderSide(width: 1, color: Color(0xFFA4A5A7)),
                 horizontalInside:
@@ -134,11 +155,16 @@ class _ListAdmins extends State<ListAdmins> {
                     (e) => DataRow(
                       onSelectChanged: ((selected) {
                         setState(() {
-                          if (doubleTapChecker.isDoubleTap(e)) {
-                            doubleTapText = "1 ${e.name}";
-                            return;
-                          }
-                          doubleTapText = "2 ${e.city}";
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const DetailAdmin()),
+                          );
+                          // if (doubleTapChecker.isDoubleTap(e)) {
+                          //   doubleTapText = "1 ${e.name}";
+                          //   return;
+                          // }
+                          // doubleTapText = "2 ${e.city}";
                         });
                       }),
                       cells: [

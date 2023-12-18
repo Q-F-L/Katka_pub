@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:katka/pages/logs.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 
 class DetailPlayer extends StatefulWidget {
@@ -11,8 +12,20 @@ class DetailPlayer extends StatefulWidget {
 class _DetailPlayerState extends State<DetailPlayer> {
   @override
   Widget build(BuildContext context) {
+    bool width = MediaQuery.of(context).size.width > 420;
+
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.keyboard_arrow_left,
+            size: 35,
+          ),
+        ),
+        centerTitle: width ? true : false,
         elevation: 0,
         scrolledUnderElevation: 0,
         title: const Text('Подробности игрока'),
@@ -72,164 +85,7 @@ class _DetailPlayerState extends State<DetailPlayer> {
                 SizedBox(
                   height: 12,
                 ),
-                Container(
-                  padding:
-                      EdgeInsets.only(right: 8, left: 24, top: 24, bottom: 24),
-                  height: 200,
-                  decoration: BoxDecoration(
-                      color: Color(0xFF292A2C),
-                      borderRadius: BorderRadius.circular(8)),
-                  child: Scrollbar(
-                    controller: ScrollController(),
-                    thickness: 3,
-                    thumbVisibility: true,
-                    trackVisibility: true,
-                    radius: Radius.circular(10),
-                    child: ListView(
-                      padding: EdgeInsets.only(right: 16),
-                      clipBehavior: Clip.antiAlias,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Название игры',
-                              style: TextStyle(
-                                color: Color(0xFFA4A5A7),
-                                fontSize: 16,
-                              ),
-                            ),
-                            Text(
-                              'Дата',
-                              style: TextStyle(
-                                color: Color(0xFFA4A5A7),
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 12,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Активные в игре режимы',
-                              style: TextStyle(
-                                color: Color(0xFFA4A5A7),
-                                fontSize: 16,
-                              ),
-                            ),
-                            Text(
-                              'Статус',
-                              style: TextStyle(
-                                color: Color(0xFFA4A5A7),
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 12,
-                        ),
-                        Divider(color: Colors.black),
-                        SizedBox(
-                          height: 12,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Катка 1',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 255, 255, 255),
-                                fontSize: 16,
-                              ),
-                            ),
-                            Text(
-                              '21.06.2024',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 255, 255, 255),
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 12,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Аркада, Зомби',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 255, 255, 255),
-                                fontSize: 16,
-                              ),
-                            ),
-                            Text(
-                              '1',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 255, 255, 255),
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 12,
-                        ),
-                        Divider(color: Colors.black),
-                        SizedBox(
-                          height: 12,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Катка 1',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 255, 255, 255),
-                                fontSize: 16,
-                              ),
-                            ),
-                            Text(
-                              '21.06.2024',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 255, 255, 255),
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 12,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Аркада, Зомби',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 255, 255, 255),
-                                fontSize: 16,
-                              ),
-                            ),
-                            Text(
-                              '1',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 255, 255, 255),
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                listPredGame1(),
                 SizedBox(
                   height: 24,
                 ),
@@ -241,161 +97,7 @@ class _DetailPlayerState extends State<DetailPlayer> {
                 SizedBox(
                   height: 12,
                 ),
-                Container(
-                  padding:
-                      EdgeInsets.only(right: 8, left: 24, top: 24, bottom: 24),
-                  height: 200,
-                  decoration: BoxDecoration(
-                      color: Color(0xFF292A2C),
-                      borderRadius: BorderRadius.circular(8)),
-                  child: Scrollbar(
-                    controller: ScrollController(),
-                    thickness: 3,
-                    thumbVisibility: true,
-                    trackVisibility: true,
-                    radius: Radius.circular(10),
-                    child: ListView(
-                      padding: EdgeInsets.only(right: 16),
-                      clipBehavior: Clip.antiAlias,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Название игры',
-                              style: TextStyle(
-                                color: Color(0xFFA4A5A7),
-                                fontSize: 16,
-                              ),
-                            ),
-                            Text(
-                              'Дата',
-                              style: TextStyle(
-                                color: Color(0xFFA4A5A7),
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 12,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Активные в игре режимы',
-                              style: TextStyle(
-                                color: Color(0xFFA4A5A7),
-                                fontSize: 16,
-                              ),
-                            ),
-                            Text(
-                              'Статус',
-                              style: TextStyle(
-                                color: Color(0xFFA4A5A7),
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 12,
-                        ),
-                        Divider(color: Colors.black),
-                        SizedBox(
-                          height: 12,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Катка 1',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 255, 255, 255),
-                                fontSize: 16,
-                              ),
-                            ),
-                            Text(
-                              '21.06.2024',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 255, 255, 255),
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 12,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Аркада, Зомби',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 255, 255, 255),
-                                fontSize: 16,
-                              ),
-                            ),
-                            Text(
-                              '1',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 255, 255, 255),
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Divider(color: Colors.black),
-                        SizedBox(
-                          height: 12,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Катка 1',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 255, 255, 255),
-                                fontSize: 16,
-                              ),
-                            ),
-                            Text(
-                              '21.06.2024',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 255, 255, 255),
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 12,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Аркада, Зомби',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 255, 255, 255),
-                                fontSize: 16,
-                              ),
-                            ),
-                            Text(
-                              '1',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 255, 255, 255),
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                listPredGame2(),
                 SizedBox(
                   height: 24,
                 ),
@@ -407,72 +109,7 @@ class _DetailPlayerState extends State<DetailPlayer> {
                 SizedBox(
                   height: 12,
                 ),
-                Container(
-                  padding:
-                      EdgeInsets.only(right: 8, left: 24, top: 24, bottom: 24),
-                  height: 200,
-                  decoration: BoxDecoration(
-                      color: Color(0xFF292A2C),
-                      borderRadius: BorderRadius.circular(8)),
-                  child: Scrollbar(
-                    controller: ScrollController(),
-                    thickness: 3,
-                    thumbVisibility: true,
-                    trackVisibility: true,
-                    radius: Radius.circular(10),
-                    child: ListView(
-                      padding: EdgeInsets.only(right: 16),
-                      clipBehavior: Clip.antiAlias,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Название игры',
-                              style: TextStyle(
-                                color: Color(0xFFA4A5A7),
-                                fontSize: 16,
-                              ),
-                            ),
-                            Text(
-                              'Дата',
-                              style: TextStyle(
-                                color: Color(0xFFA4A5A7),
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 12,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Описание',
-                              style: TextStyle(
-                                color: Color(0xFFA4A5A7),
-                                fontSize: 16,
-                              ),
-                            ),
-                            Text(
-                              'Кем выдан',
-                              style: TextStyle(
-                                color: Color(0xFFA4A5A7),
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 12,
-                        ),
-                        Divider(color: Colors.black),
-                      ],
-                    ),
-                  ),
-                ),
+                listPredGame3(),
                 SizedBox(
                   height: 24,
                 ),
@@ -481,7 +118,7 @@ class _DetailPlayerState extends State<DetailPlayer> {
                   runSpacing: 12,
                   children: [
                     Container(
-                      width: MediaQuery.of(context).size.width * 0.19,
+                      width: 76,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         color: Color(0xFF292A2C),
@@ -489,7 +126,7 @@ class _DetailPlayerState extends State<DetailPlayer> {
                       child: Image.asset('assets/png/gun.png'),
                     ),
                     Container(
-                      width: MediaQuery.of(context).size.width * 0.19,
+                      width: 76,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         color: Color(0xFF292A2C),
@@ -497,7 +134,7 @@ class _DetailPlayerState extends State<DetailPlayer> {
                       child: Image.asset('assets/png/rifle.png'),
                     ),
                     Container(
-                      width: MediaQuery.of(context).size.width * 0.19,
+                      width: 76,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         color: Color(0xFF292A2C),
@@ -505,7 +142,7 @@ class _DetailPlayerState extends State<DetailPlayer> {
                       child: Image.asset('assets/png/granade.png'),
                     ),
                     Container(
-                      width: MediaQuery.of(context).size.width * 0.19,
+                      width: 76,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         color: Color(0xFF292A2C),
@@ -513,7 +150,7 @@ class _DetailPlayerState extends State<DetailPlayer> {
                       child: Image.asset('assets/png/first_aid_kit.png'),
                     ),
                     Container(
-                      width: MediaQuery.of(context).size.width * 0.19,
+                      width: 76,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         color: Color(0xFF292A2C),
@@ -526,7 +163,12 @@ class _DetailPlayerState extends State<DetailPlayer> {
                   height: 24,
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Logs()),
+                    );
+                  },
                   style: ButtonStyle(
                     minimumSize: MaterialStateProperty.all(Size.fromHeight(50)),
                     shape: MaterialStateProperty.all(
@@ -613,6 +255,415 @@ class _DetailPlayerState extends State<DetailPlayer> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget listPredGame1() {
+    var _scrollController = ScrollController();
+
+    return Container(
+      padding: EdgeInsets.only(right: 8, left: 24, top: 24, bottom: 24),
+      height: 200,
+      decoration: BoxDecoration(
+          color: Color(0xFF292A2C), borderRadius: BorderRadius.circular(8)),
+      child: Scrollbar(
+        controller: _scrollController,
+        thickness: 3,
+        thumbVisibility: true,
+        trackVisibility: true,
+        radius: Radius.circular(10),
+        child: ListView.builder(
+          controller: _scrollController,
+          itemCount: 10,
+          padding: EdgeInsets.only(right: 16),
+          clipBehavior: Clip.antiAlias,
+          itemBuilder: (context, index) {
+            if (index == 0) {
+              return Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Название игры',
+                        style: TextStyle(
+                          color: Color(0xFFA4A5A7),
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        'Дата',
+                        style: TextStyle(
+                          color: Color(0xFFA4A5A7),
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Активные в игре режимы',
+                        style: TextStyle(
+                          color: Color(0xFFA4A5A7),
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        'Статус',
+                        style: TextStyle(
+                          color: Color(0xFFA4A5A7),
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Divider(color: Color(0xFFA4A5A7)),
+                  SizedBox(
+                    height: 12,
+                  ),
+                ],
+              );
+            }
+            if (10 != index) {
+              return Column(
+                children: [
+                  PredGame1(),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Divider(color: Color(0xFFA4A5A7)),
+                  SizedBox(
+                    height: 12,
+                  ),
+                ],
+              );
+            }
+            return PredGame1();
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget PredGame1() {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Катка 1',
+              style: TextStyle(
+                color: Color.fromARGB(255, 255, 255, 255),
+                fontSize: 16,
+              ),
+            ),
+            Text(
+              '21.06.2024',
+              style: TextStyle(
+                color: Color.fromARGB(255, 255, 255, 255),
+                fontSize: 16,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 12,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Аркада, Зомби',
+              style: TextStyle(
+                color: Color.fromARGB(255, 255, 255, 255),
+                fontSize: 16,
+              ),
+            ),
+            Text(
+              '1',
+              style: TextStyle(
+                color: Color.fromARGB(255, 255, 255, 255),
+                fontSize: 16,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget listPredGame2() {
+    var _scrollController = ScrollController();
+
+    return Container(
+      padding: EdgeInsets.only(right: 8, left: 24, top: 24, bottom: 24),
+      height: 200,
+      decoration: BoxDecoration(
+          color: Color(0xFF292A2C), borderRadius: BorderRadius.circular(8)),
+      child: Scrollbar(
+        controller: _scrollController,
+        thickness: 3,
+        thumbVisibility: true,
+        trackVisibility: true,
+        radius: Radius.circular(10),
+        child: ListView.builder(
+          itemCount: 10,
+          controller: _scrollController,
+          padding: EdgeInsets.only(right: 16),
+          clipBehavior: Clip.antiAlias,
+          itemBuilder: (context, index) {
+            if (index == 0) {
+              return Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Название игры',
+                        style: TextStyle(
+                          color: Color(0xFFA4A5A7),
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        'Дата',
+                        style: TextStyle(
+                          color: Color(0xFFA4A5A7),
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Активные в игре режимы',
+                        style: TextStyle(
+                          color: Color(0xFFA4A5A7),
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        'Статус',
+                        style: TextStyle(
+                          color: Color(0xFFA4A5A7),
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Divider(color: Color(0xFFA4A5A7)),
+                  SizedBox(
+                    height: 12,
+                  ),
+                ],
+              );
+            }
+            if (10 != index) {
+              return Column(
+                children: [
+                  PredGame1(),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Divider(color: Color(0xFFA4A5A7)),
+                  SizedBox(
+                    height: 12,
+                  ),
+                ],
+              );
+            }
+            return PredGame1();
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget PredGame2() {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Катка 1',
+              style: TextStyle(
+                color: Color.fromARGB(255, 255, 255, 255),
+                fontSize: 16,
+              ),
+            ),
+            Text(
+              '21.06.2024',
+              style: TextStyle(
+                color: Color.fromARGB(255, 255, 255, 255),
+                fontSize: 16,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 12,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Аркада, Зомби',
+              style: TextStyle(
+                color: Color.fromARGB(255, 255, 255, 255),
+                fontSize: 16,
+              ),
+            ),
+            Text(
+              '1',
+              style: TextStyle(
+                color: Color.fromARGB(255, 255, 255, 255),
+                fontSize: 16,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget listPredGame3() {
+    var _scrollController = ScrollController();
+
+    return Container(
+      padding: EdgeInsets.only(right: 8, left: 24, top: 24, bottom: 24),
+      height: 200,
+      decoration: BoxDecoration(
+          color: Color(0xFF292A2C), borderRadius: BorderRadius.circular(8)),
+      child: Scrollbar(
+        controller: _scrollController,
+        thickness: 3,
+        thumbVisibility: true,
+        trackVisibility: true,
+        radius: Radius.circular(10),
+        child: ListView.builder(
+          controller: _scrollController,
+          itemCount: 10,
+          padding: EdgeInsets.only(right: 16),
+          clipBehavior: Clip.antiAlias,
+          itemBuilder: (context, index) {
+            return Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Название игры',
+                      style: TextStyle(
+                        color: Color(0xFFA4A5A7),
+                        fontSize: 16,
+                      ),
+                    ),
+                    Text(
+                      'Дата',
+                      style: TextStyle(
+                        color: Color(0xFFA4A5A7),
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 12,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Описание',
+                      style: TextStyle(
+                        color: Color(0xFFA4A5A7),
+                        fontSize: 16,
+                      ),
+                    ),
+                    Text(
+                      'Кем выдан',
+                      style: TextStyle(
+                        color: Color(0xFFA4A5A7),
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 12,
+                ),
+                Divider(color: Color(0xFFA4A5A7)),
+              ],
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget PredGame3() {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Катка 1',
+              style: TextStyle(
+                color: Color.fromARGB(255, 255, 255, 255),
+                fontSize: 16,
+              ),
+            ),
+            Text(
+              '21.06.2024',
+              style: TextStyle(
+                color: Color.fromARGB(255, 255, 255, 255),
+                fontSize: 16,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 12,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Аркада, Зомби',
+              style: TextStyle(
+                color: Color.fromARGB(255, 255, 255, 255),
+                fontSize: 16,
+              ),
+            ),
+            Text(
+              '1',
+              style: TextStyle(
+                color: Color.fromARGB(255, 255, 255, 255),
+                fontSize: 16,
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

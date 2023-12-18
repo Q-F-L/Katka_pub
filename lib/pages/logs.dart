@@ -14,8 +14,20 @@ class _LogsState extends State<Logs> {
 
   @override
   Widget build(BuildContext context) {
+    bool width = MediaQuery.of(context).size.width > 420;
+
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.keyboard_arrow_left,
+            size: 35,
+          ),
+        ),
+        centerTitle: width ? true : false,
         title: Text('Логи игрока'),
         backgroundColor: Color.fromARGB(255, 41, 42, 44),
       ),

@@ -1,19 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:katka/pages/admin/listAdmins.dart';
+import 'package:katka/pages/admin/listComand.dart';
+import 'package:katka/pages/admin/listGames.dart';
+import 'package:katka/pages/admin/listPlayer.dart';
+import 'package:katka/pages/listGame.dart';
 
 class AdminMenu extends StatelessWidget {
   const AdminMenu({super.key});
-
   @override
   Widget build(BuildContext context) {
+    bool width = MediaQuery.of(context).size.width > 420;
+
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 16),
+        margin: EdgeInsets.symmetric(
+            horizontal: width ? MediaQuery.of(context).size.width * 0.22 : 16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ListPlayers()),
+                );
+              },
               style: ButtonStyle(
                 minimumSize: MaterialStateProperty.all(Size.fromHeight(50)),
                 shape: MaterialStateProperty.all(
@@ -38,7 +50,12 @@ class AdminMenu extends StatelessWidget {
               height: 12,
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ListAdmins()),
+                );
+              },
               style: ButtonStyle(
                 minimumSize: MaterialStateProperty.all(Size.fromHeight(50)),
                 shape: MaterialStateProperty.all(
@@ -63,7 +80,13 @@ class AdminMenu extends StatelessWidget {
               height: 12,
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AdminListGames()),
+                );
+              },
               style: ButtonStyle(
                 minimumSize: MaterialStateProperty.all(Size.fromHeight(50)),
                 shape: MaterialStateProperty.all(
@@ -88,7 +111,12 @@ class AdminMenu extends StatelessWidget {
               height: 12,
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ListComands()),
+                );
+              },
               style: ButtonStyle(
                 minimumSize: MaterialStateProperty.all(Size.fromHeight(50)),
                 shape: MaterialStateProperty.all(

@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:katka/pages/activeGame.dart';
+import 'package:katka/pages/admin/activeGame.dart';
+import 'package:katka/pages/admin/createMap/createPointBatlle.dart';
+import 'package:katka/pages/admin/createMap/createPointInterest.dart';
+import 'package:katka/pages/admin/createMap/createRounds.dart';
+import 'package:katka/pages/admin/createMap/createRoundsFix.dart';
 import 'package:katka/pages/admin/createNewAdmin.dart';
 import 'package:katka/pages/admin/detailAdmin.dart';
 import 'package:katka/pages/admin/detailGame.dart';
@@ -47,7 +52,7 @@ class Katka extends StatelessWidget {
       themeMode: ThemeMode.dark,
       theme: lightTheme(),
       darkTheme: darkTheme(),
-      home: qrCodeRead(),
+      home: AdminMenu(),
     );
   }
 }

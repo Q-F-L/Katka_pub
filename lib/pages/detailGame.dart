@@ -13,6 +13,15 @@ class _DetailGameState extends State<DetailGame> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.keyboard_arrow_left,
+            size: 35,
+          ),
+        ),
         elevation: 0,
         scrolledUnderElevation: 0,
         title: const Text('Название игры'),
@@ -379,7 +388,7 @@ class _DetailGameState extends State<DetailGame> {
                   runSpacing: 12,
                   children: [
                     Container(
-                      width: MediaQuery.of(context).size.width * 0.19,
+                      width: 76,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         color: Color(0xFF292A2C),
@@ -387,7 +396,7 @@ class _DetailGameState extends State<DetailGame> {
                       child: Image.asset('assets/png/gun.png'),
                     ),
                     Container(
-                      width: MediaQuery.of(context).size.width * 0.19,
+                      width: 76,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         color: Color(0xFF292A2C),
@@ -395,7 +404,7 @@ class _DetailGameState extends State<DetailGame> {
                       child: Image.asset('assets/png/rifle.png'),
                     ),
                     Container(
-                      width: MediaQuery.of(context).size.width * 0.19,
+                      width: 76,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         color: Color(0xFF292A2C),
@@ -403,7 +412,7 @@ class _DetailGameState extends State<DetailGame> {
                       child: Image.asset('assets/png/granade.png'),
                     ),
                     Container(
-                      width: MediaQuery.of(context).size.width * 0.19,
+                      width: 76,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         color: Color(0xFF292A2C),
@@ -411,7 +420,7 @@ class _DetailGameState extends State<DetailGame> {
                       child: Image.asset('assets/png/first_aid_kit.png'),
                     ),
                     Container(
-                      width: MediaQuery.of(context).size.width * 0.19,
+                      width: 76,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         color: Color(0xFF292A2C),

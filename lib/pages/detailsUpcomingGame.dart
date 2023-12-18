@@ -13,6 +13,15 @@ class _DetailsUpcomingGameState extends State<DetailsUpcomingGame> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.keyboard_arrow_left,
+            size: 35,
+          ),
+        ),
         elevation: 0,
         scrolledUnderElevation: 0,
         title: const Text('Подробности предстоящей игры'),

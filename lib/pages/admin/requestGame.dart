@@ -12,8 +12,20 @@ class RequestGame extends StatefulWidget {
 class _RequestGameStatus extends State<RequestGame> {
   @override
   Widget build(BuildContext context) {
+    bool width = MediaQuery.of(context).size.width > 420;
+
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.keyboard_arrow_left,
+            size: 35,
+          ),
+        ),
+        centerTitle: width ? true : false,
         title: Text('Команды'),
         backgroundColor: Color.fromARGB(255, 41, 42, 44),
       ),
@@ -25,7 +37,7 @@ class _RequestGameStatus extends State<RequestGame> {
             SizedBox(
               height: 4,
             ),
-            ElementList(),
+            ElementList(width),
             SizedBox(
               height: 4,
             ),
@@ -33,7 +45,7 @@ class _RequestGameStatus extends State<RequestGame> {
             SizedBox(
               height: 4,
             ),
-            ElementList(),
+            ElementList(width),
             SizedBox(
               height: 4,
             ),
@@ -41,7 +53,7 @@ class _RequestGameStatus extends State<RequestGame> {
             SizedBox(
               height: 4,
             ),
-            ElementList(),
+            ElementList(width),
             SizedBox(
               height: 4,
             ),
@@ -49,7 +61,7 @@ class _RequestGameStatus extends State<RequestGame> {
             SizedBox(
               height: 4,
             ),
-            ElementList(),
+            ElementList(width),
             SizedBox(
               height: 4,
             ),
@@ -57,7 +69,7 @@ class _RequestGameStatus extends State<RequestGame> {
             SizedBox(
               height: 4,
             ),
-            ElementList(),
+            ElementList(width),
             SizedBox(
               height: 4,
             ),
@@ -65,7 +77,7 @@ class _RequestGameStatus extends State<RequestGame> {
             SizedBox(
               height: 4,
             ),
-            ElementList(),
+            ElementList(width),
             SizedBox(
               height: 4,
             ),
@@ -73,7 +85,7 @@ class _RequestGameStatus extends State<RequestGame> {
             SizedBox(
               height: 4,
             ),
-            ElementList(),
+            ElementList(width),
             SizedBox(
               height: 4,
             ),
@@ -81,7 +93,7 @@ class _RequestGameStatus extends State<RequestGame> {
             SizedBox(
               height: 4,
             ),
-            ElementList(),
+            ElementList(width),
             SizedBox(
               height: 4,
             ),
@@ -89,7 +101,7 @@ class _RequestGameStatus extends State<RequestGame> {
             SizedBox(
               height: 4,
             ),
-            ElementList(),
+            ElementList(width),
             SizedBox(
               height: 4,
             ),
@@ -97,7 +109,7 @@ class _RequestGameStatus extends State<RequestGame> {
             SizedBox(
               height: 4,
             ),
-            ElementList(),
+            ElementList(width),
             SizedBox(
               height: 4,
             ),
@@ -105,7 +117,7 @@ class _RequestGameStatus extends State<RequestGame> {
             SizedBox(
               height: 4,
             ),
-            ElementList(),
+            ElementList(width),
             SizedBox(
               height: 4,
             ),
@@ -113,7 +125,7 @@ class _RequestGameStatus extends State<RequestGame> {
             SizedBox(
               height: 4,
             ),
-            ElementList(),
+            ElementList(width),
             SizedBox(
               height: 4,
             ),
@@ -127,7 +139,7 @@ class _RequestGameStatus extends State<RequestGame> {
     );
   }
 
-  Widget ElementList() {
+  Widget ElementList(bool width) {
     List<String> list = ['Список', 'Список1', 'Список2', 'Список3'];
 
     return TextButton(
@@ -173,62 +185,106 @@ class _RequestGameStatus extends State<RequestGame> {
           ],
         ),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Ник',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: "Inter",
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16,
+      child: !width
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Ник',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: "Inter",
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Статус',
-                    style: TextStyle(
-                      fontFamily: "Inter",
-                      color: Color(0xFFA4A5A7),
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Статус',
+                          style: TextStyle(
+                            fontFamily: "Inter",
+                            color: Color(0xFFA4A5A7),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),
+                          textAlign: TextAlign.end,
+                        ),
+                        SizedBox(
+                          width: 24,
+                        ),
+                        Icon(
+                          Icons.stars,
+                          color: Color.fromARGB(255, 246, 188, 29),
+                        ),
+                        Text(
+                          ' рейтинг 100',
+                          style: TextStyle(
+                            fontFamily: "Inter",
+                            color: Color(0xFFF6BD1D),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),
+                          textAlign: TextAlign.end,
+                        ),
+                      ],
                     ),
-                    textAlign: TextAlign.end,
+                  ],
+                ),
+              ],
+            )
+          : Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Ник',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: "Inter",
+                    fontWeight: FontWeight.w400,
+                    fontSize: 16,
                   ),
-                  SizedBox(
-                    width: 24,
+                ),
+                Text(
+                  'Статус',
+                  style: TextStyle(
+                    fontFamily: "Inter",
+                    color: Color(0xFFA4A5A7),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
                   ),
-                  Icon(
-                    Icons.stars,
-                    color: Color.fromARGB(255, 246, 188, 29),
-                  ),
-                  Text(
-                    ' рейтинг 100',
-                    style: TextStyle(
-                      fontFamily: "Inter",
-                      color: Color(0xFFF6BD1D),
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
+                  textAlign: TextAlign.end,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Icon(
+                      Icons.stars,
+                      color: Color.fromARGB(255, 246, 188, 29),
                     ),
-                    textAlign: TextAlign.end,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      ),
+                    Text(
+                      ' рейтинг 100',
+                      style: TextStyle(
+                        fontFamily: "Inter",
+                        color: Color(0xFFF6BD1D),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      textAlign: TextAlign.end,
+                    ),
+                  ],
+                ),
+              ],
+            ),
     );
   }
 

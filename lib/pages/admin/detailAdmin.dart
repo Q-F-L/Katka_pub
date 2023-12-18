@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:katka/components/src/CityDropdownButtonFromField.dart';
+import 'package:katka/pages/admin/logs.dart';
+import 'package:katka/pages/logs.dart';
 // import 'package:katka/components/src/dropdownButtonFromField.dart';
 
 class DetailAdmin extends StatefulWidget {
@@ -14,8 +16,20 @@ class _DetailAdminState extends State<DetailAdmin> {
 
   @override
   Widget build(BuildContext context) {
+    bool width = MediaQuery.of(context).size.width > 420;
+
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.keyboard_arrow_left,
+            size: 35,
+          ),
+        ),
+        centerTitle: width ? true : false,
         title: Text('Администратор'),
         backgroundColor: Color.fromARGB(255, 41, 42, 44),
       ),
@@ -88,7 +102,7 @@ class _DetailAdminState extends State<DetailAdmin> {
             Container(
               width: MediaQuery.of(context).size.width * 1,
               child: Text(
-                'Количество игроков',
+                'Предстоящие игры',
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 20,
@@ -190,7 +204,12 @@ class _DetailAdminState extends State<DetailAdmin> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const adminLogs()),
+                  );
+                },
                 style: ButtonStyle(
                   minimumSize: MaterialStateProperty.all(Size.fromHeight(50)),
                   shape: MaterialStateProperty.all(
@@ -259,94 +278,143 @@ class _DetailAdminState extends State<DetailAdmin> {
     var _scrollController = ScrollController();
 
     return Container(
-      margin: EdgeInsets.only(left: 16, right: 16),
+      margin: EdgeInsets.symmetric(horizontal: 16),
       padding: EdgeInsets.only(right: 8, left: 24, top: 24, bottom: 24),
       height: 200,
       decoration: BoxDecoration(
-        color: Color(0xFF292A2C),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      alignment: Alignment.topCenter,
+          color: Color(0xFF292A2C), borderRadius: BorderRadius.circular(8)),
       child: Scrollbar(
         controller: _scrollController,
         thickness: 3,
         thumbVisibility: true,
         trackVisibility: true,
         radius: Radius.circular(10),
-        child: Container(
+        child: ListView.builder(
+          controller: _scrollController,
+          itemCount: 10,
           padding: EdgeInsets.only(right: 16),
-          height: 200,
-          decoration: BoxDecoration(
-              color: Color(0xFF292A2C), borderRadius: BorderRadius.circular(8)),
-          child: ListView.builder(
-            controller: _scrollController,
-            itemCount: 10,
-            itemBuilder: (BuildContext context, int index) {
-              if (index + 1 != 10) {
-                return Column(
-                  children: [
-                    PredGame1(),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    const Divider(color: Colors.black),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                  ],
-                );
-              }
-              return PredGame1();
-            },
-            clipBehavior: Clip.antiAlias,
-          ),
+          clipBehavior: Clip.antiAlias,
+          itemBuilder: (context, index) {
+            if (index == 0) {
+              return Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Название игры',
+                        style: TextStyle(
+                          color: Color(0xFFA4A5A7),
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        'Дата',
+                        style: TextStyle(
+                          color: Color(0xFFA4A5A7),
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Активные в игре режимы',
+                        style: TextStyle(
+                          color: Color(0xFFA4A5A7),
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        'Статус',
+                        style: TextStyle(
+                          color: Color(0xFFA4A5A7),
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Divider(color: Color(0xFFA4A5A7)),
+                  SizedBox(
+                    height: 12,
+                  ),
+                ],
+              );
+            }
+            if (10 != index) {
+              return Column(
+                children: [
+                  PredGame1(),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Divider(color: Color(0xFFA4A5A7)),
+                  SizedBox(
+                    height: 12,
+                  ),
+                ],
+              );
+            }
+            return PredGame1();
+          },
         ),
       ),
     );
   }
 
   Widget PredGame1() {
-    return Container(
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                'Название',
-                style: TextStyle(
-                  color: Color.fromARGB(255, 255, 255, 255),
-                  fontSize: 16,
-                ),
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Катка 1',
+              style: TextStyle(
+                color: Color.fromARGB(255, 255, 255, 255),
+                fontSize: 16,
               ),
-              const Text(
-                'Координаты',
-                style: TextStyle(
-                  color: Color(0xFFA4A5A7),
-                  fontSize: 16,
-                  fontFamily: "Inter",
-                ),
+            ),
+            Text(
+              '21.06.2024',
+              style: TextStyle(
+                color: Color.fromARGB(255, 255, 255, 255),
+                fontSize: 16,
               ),
-            ],
-          ),
-          SizedBox(
-            height: 12,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Text(
-                'Уникальный код',
-                style: TextStyle(
-                  color: Color(0xFFA4A5A7),
-                  fontSize: 16,
-                  fontFamily: "Inter",
-                ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 12,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Аркада, Зомби',
+              style: TextStyle(
+                color: Color.fromARGB(255, 255, 255, 255),
+                fontSize: 16,
               ),
-            ],
-          )
-        ],
-      ),
+            ),
+            Text(
+              '1',
+              style: TextStyle(
+                color: Color.fromARGB(255, 255, 255, 255),
+                fontSize: 16,
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 
@@ -354,94 +422,143 @@ class _DetailAdminState extends State<DetailAdmin> {
     var _scrollController = ScrollController();
 
     return Container(
-      margin: EdgeInsets.only(left: 16, right: 16),
+      margin: EdgeInsets.symmetric(horizontal: 16),
       padding: EdgeInsets.only(right: 8, left: 24, top: 24, bottom: 24),
       height: 200,
       decoration: BoxDecoration(
-        color: Color(0xFF292A2C),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      alignment: Alignment.topCenter,
+          color: Color(0xFF292A2C), borderRadius: BorderRadius.circular(8)),
       child: Scrollbar(
         controller: _scrollController,
         thickness: 3,
         thumbVisibility: true,
         trackVisibility: true,
         radius: Radius.circular(10),
-        child: Container(
+        child: ListView.builder(
+          itemCount: 10,
+          controller: _scrollController,
           padding: EdgeInsets.only(right: 16),
-          height: 200,
-          decoration: BoxDecoration(
-              color: Color(0xFF292A2C), borderRadius: BorderRadius.circular(8)),
-          child: ListView.builder(
-            controller: _scrollController,
-            itemCount: 10,
-            itemBuilder: (BuildContext context, int index) {
-              if (index + 1 != 10) {
-                return Column(
-                  children: [
-                    PredGame2(),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    const Divider(color: Colors.black),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                  ],
-                );
-              }
-              return PredGame2();
-            },
-            clipBehavior: Clip.antiAlias,
-          ),
+          clipBehavior: Clip.antiAlias,
+          itemBuilder: (context, index) {
+            if (index == 0) {
+              return Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Название игры',
+                        style: TextStyle(
+                          color: Color(0xFFA4A5A7),
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        'Дата',
+                        style: TextStyle(
+                          color: Color(0xFFA4A5A7),
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Активные в игре режимы',
+                        style: TextStyle(
+                          color: Color(0xFFA4A5A7),
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        'Статус',
+                        style: TextStyle(
+                          color: Color(0xFFA4A5A7),
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Divider(color: Color(0xFFA4A5A7)),
+                  SizedBox(
+                    height: 12,
+                  ),
+                ],
+              );
+            }
+            if (10 != index) {
+              return Column(
+                children: [
+                  PredGame1(),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Divider(color: Color(0xFFA4A5A7)),
+                  SizedBox(
+                    height: 12,
+                  ),
+                ],
+              );
+            }
+            return PredGame1();
+          },
         ),
       ),
     );
   }
 
   Widget PredGame2() {
-    return Container(
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                'Название',
-                style: TextStyle(
-                    color: Color(0xFFA4A5A7),
-                    fontSize: 16,
-                    fontFamily: "Inter"),
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Катка 1',
+              style: TextStyle(
+                color: Color.fromARGB(255, 255, 255, 255),
+                fontSize: 16,
               ),
-              const Text(
-                'Дата',
-                style: TextStyle(
-                  color: Color(0xFFA4A5A7),
-                  fontSize: 16,
-                  fontFamily: "Inter",
-                ),
+            ),
+            Text(
+              '21.06.2024',
+              style: TextStyle(
+                color: Color.fromARGB(255, 255, 255, 255),
+                fontSize: 16,
               ),
-            ],
-          ),
-          SizedBox(
-            height: 12,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Text(
-                'Уникальный код',
-                style: TextStyle(
-                  color: Color(0xFFA4A5A7),
-                  fontSize: 16,
-                  fontFamily: "Inter",
-                ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 12,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Аркада, Зомби',
+              style: TextStyle(
+                color: Color.fromARGB(255, 255, 255, 255),
+                fontSize: 16,
               ),
-            ],
-          )
-        ],
-      ),
+            ),
+            Text(
+              '1',
+              style: TextStyle(
+                color: Color.fromARGB(255, 255, 255, 255),
+                fontSize: 16,
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

@@ -12,8 +12,31 @@ class ListRound extends StatefulWidget {
 class _ListRoundStatus extends State<ListRound> {
   @override
   Widget build(BuildContext context) {
+    bool width = MediaQuery.of(context).size.width > 420;
+
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        focusElevation: 0,
+        hoverElevation: 0,
+        disabledElevation: 0,
+        highlightElevation: 0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        backgroundColor: Color(0xFF292A2C),
+        elevation: 0,
+        child: Image.asset('assets/png/plus.png'),
+        onPressed: () {},
+      ),
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.keyboard_arrow_left,
+            size: 35,
+          ),
+        ),
+        centerTitle: width ? true : false,
         title: Text('Команды'),
         backgroundColor: Color.fromARGB(255, 41, 42, 44),
       ),
@@ -221,6 +244,11 @@ class _ListRoundStatus extends State<ListRound> {
           borderRadius: BorderRadius.all(Radius.circular(8)),
           borderSide: BorderSide(color: Color(0xFFA4A5A7)),
         ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(8)),
+          borderSide: BorderSide(color: Color(0xFFA4A5A7)), //<-- SEE HERE
+        ),
+
         // filled: true,
         // fillColor: Color.fromARGB(255, 41, 42, 44),
         hintText: hintText,

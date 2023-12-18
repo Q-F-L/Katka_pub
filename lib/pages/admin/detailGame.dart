@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:katka/pages/admin/activeGame.dart';
+import 'package:katka/pages/admin/requestGame.dart';
+import 'package:katka/pages/qrCodeRead.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 
 class AdminDetailGame extends StatefulWidget {
@@ -13,8 +16,20 @@ class _AdminDetailGameState extends State<AdminDetailGame> {
 
   @override
   Widget build(BuildContext context) {
+    bool width = MediaQuery.of(context).size.width > 420;
+
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.keyboard_arrow_left,
+            size: 35,
+          ),
+        ),
+        centerTitle: width ? true : false,
         elevation: 0,
         scrolledUnderElevation: 0,
         title: const Text('Подробности игры'),
@@ -39,7 +54,7 @@ class _AdminDetailGameState extends State<AdminDetailGame> {
                 const SizedBox(
                   height: 12,
                 ),
-                dropButtonFromField(list, 'Режим зомби', 'Режим зомби'),
+                dropButtonFromField(list, 'Режим зомби', 'Режим зомби', true),
                 const SizedBox(
                   height: 12,
                 ),
@@ -152,6 +167,10 @@ class _AdminDetailGameState extends State<AdminDetailGame> {
                 const SizedBox(
                   height: 24,
                 ),
+                equipment(),
+                const SizedBox(
+                  height: 24,
+                ),
                 dropButtonElevetedButton(list, "Обнуление снаряжения"),
                 const SizedBox(
                   height: 24,
@@ -174,31 +193,196 @@ class _AdminDetailGameState extends State<AdminDetailGame> {
                 const SizedBox(
                   height: 24,
                 ),
-                customButtom('Карта'),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AdminActiveGame()),
+                    );
+                  },
+                  child: Text(
+                    "Карта",
+                    style: TextStyle(
+                      fontFamily: "Inter",
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                      color: Color.fromARGB(255, 77, 31, 0),
+                    ),
+                  ),
+                  style: ButtonStyle(
+                    minimumSize: MaterialStateProperty.all(Size.fromHeight(50)),
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                    backgroundColor: MaterialStateColor.resolveWith(
+                        (states) => Color.fromARGB(255, 246, 188, 29)),
+                  ),
+                ),
                 const SizedBox(
                   height: 12,
                 ),
-                customButtom('Заявки'),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const RequestGame()),
+                    );
+                  },
+                  child: Text(
+                    "Заявки",
+                    style: TextStyle(
+                      fontFamily: "Inter",
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                      color: Color.fromARGB(255, 77, 31, 0),
+                    ),
+                  ),
+                  style: ButtonStyle(
+                    minimumSize: MaterialStateProperty.all(Size.fromHeight(50)),
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                    backgroundColor: MaterialStateColor.resolveWith(
+                        (states) => Color.fromARGB(255, 246, 188, 29)),
+                  ),
+                ),
                 const SizedBox(
                   height: 12,
                 ),
-                customButtom('Проверка игрока'),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const qrCodeRead()),
+                    );
+                  },
+                  child: Text(
+                    "Проверка игрока",
+                    style: TextStyle(
+                      fontFamily: "Inter",
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                      color: Color.fromARGB(255, 77, 31, 0),
+                    ),
+                  ),
+                  style: ButtonStyle(
+                    minimumSize: MaterialStateProperty.all(Size.fromHeight(50)),
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                    backgroundColor: MaterialStateColor.resolveWith(
+                        (states) => Color.fromARGB(255, 246, 188, 29)),
+                  ),
+                ),
                 const SizedBox(
                   height: 12,
                 ),
-                customButtom('Опубликовать'),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Опубликовать",
+                    style: TextStyle(
+                      fontFamily: "Inter",
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                      color: Color.fromARGB(255, 77, 31, 0),
+                    ),
+                  ),
+                  style: ButtonStyle(
+                    minimumSize: MaterialStateProperty.all(Size.fromHeight(50)),
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                    backgroundColor: MaterialStateColor.resolveWith(
+                        (states) => Color.fromARGB(255, 246, 188, 29)),
+                  ),
+                ),
                 const SizedBox(
                   height: 12,
                 ),
-                customButtom('Сохранить'),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Сохранить",
+                    style: TextStyle(
+                      fontFamily: "Inter",
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                      color: Color.fromARGB(255, 77, 31, 0),
+                    ),
+                  ),
+                  style: ButtonStyle(
+                    minimumSize: MaterialStateProperty.all(Size.fromHeight(50)),
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                    backgroundColor: MaterialStateColor.resolveWith(
+                        (states) => Color.fromARGB(255, 246, 188, 29)),
+                  ),
+                ),
                 const SizedBox(
                   height: 12,
                 ),
-                customButtom('Удалить'),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Удалить",
+                    style: TextStyle(
+                      fontFamily: "Inter",
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                      color: Color.fromARGB(255, 77, 31, 0),
+                    ),
+                  ),
+                  style: ButtonStyle(
+                    minimumSize: MaterialStateProperty.all(Size.fromHeight(50)),
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                    backgroundColor: MaterialStateColor.resolveWith(
+                        (states) => Color.fromARGB(255, 246, 188, 29)),
+                  ),
+                ),
                 const SizedBox(
                   height: 12,
                 ),
-                customButtom('Завершить игру'),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Завершить игру",
+                    style: TextStyle(
+                      fontFamily: "Inter",
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                      color: Color.fromARGB(255, 77, 31, 0),
+                    ),
+                  ),
+                  style: ButtonStyle(
+                    minimumSize: MaterialStateProperty.all(Size.fromHeight(50)),
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                    backgroundColor: MaterialStateColor.resolveWith(
+                        (states) => Color.fromARGB(255, 246, 188, 29)),
+                  ),
+                ),
               ],
             ),
           ),
@@ -208,44 +392,55 @@ class _AdminDetailGameState extends State<AdminDetailGame> {
   }
 
   Widget equipment() {
-    return Wrap(
-      spacing: 12,
-      runSpacing: 12,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          width: MediaQuery.of(context).size.width * 0.19,
+          width: 76,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             color: Color(0xFF292A2C),
           ),
           child: Image.asset('assets/png/gun.png'),
         ),
+        SizedBox(
+          width: 12,
+        ),
         Container(
-          width: MediaQuery.of(context).size.width * 0.19,
+          width: 76,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             color: Color(0xFF292A2C),
           ),
           child: Image.asset('assets/png/rifle.png'),
         ),
+        SizedBox(
+          width: 12,
+        ),
         Container(
-          width: MediaQuery.of(context).size.width * 0.19,
+          width: 76,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             color: Color(0xFF292A2C),
           ),
           child: Image.asset('assets/png/granade.png'),
         ),
+        SizedBox(
+          width: 12,
+        ),
         Container(
-          width: MediaQuery.of(context).size.width * 0.19,
+          width: 76,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             color: Color(0xFF292A2C),
           ),
           child: Image.asset('assets/png/first_aid_kit.png'),
         ),
+        SizedBox(
+          width: 12,
+        ),
         Container(
-          width: MediaQuery.of(context).size.width * 0.19,
+          width: 76,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             color: Color(0xFF292A2C),
@@ -311,7 +506,8 @@ class _AdminDetailGameState extends State<AdminDetailGame> {
   }
 
   Widget dropButtonFromField(
-      List<String> list, String defaultValue, String title) {
+      List<String> list, String defaultValue, String title,
+      [bool accent = false]) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -332,16 +528,24 @@ class _AdminDetailGameState extends State<AdminDetailGame> {
             color: Color.fromARGB(255, 41, 42, 44),
             borderRadius: BorderRadius.circular(8),
           ),
-          child: DropdownButtonFormField(
+          child: DropdownButton(
+            underline: Container(),
+            isDense: true,
+            isExpanded: true,
+            padding: EdgeInsets.only(right: 14, left: 14, top: 14, bottom: 14),
+            icon: Icon(Icons.keyboard_arrow_down),
+            iconDisabledColor: Colors.white,
+            iconEnabledColor: Colors.white,
             menuMaxHeight: 200,
             elevation: 0,
             borderRadius: BorderRadius.circular(8),
-            dropdownColor: Color.fromARGB(255, 41, 42, 44),
+            dropdownColor: Color(0xFF292A2C),
             hint: Text(
-              '$defaultValue',
+              '$title',
               style: TextStyle(
-                color: Color.fromARGB(255, 164, 165, 167),
+                color: accent ? Colors.white : Color(0xFFA4A5A7),
                 fontFamily: "Inter",
+                fontWeight: FontWeight.w600,
                 fontSize: 16,
               ),
             ),
@@ -351,19 +555,19 @@ class _AdminDetailGameState extends State<AdminDetailGame> {
                 // selectedItem = data as String;
               });
             },
-            decoration: const InputDecoration(
-              fillColor: Color.fromARGB(255, 41, 42, 44),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-                borderSide: BorderSide.none,
-              ),
-            ),
+            // decoration: const InputDecoration(
+            //   fillColor: Color.fromARGB(255, 41, 42, 44),
+            //   border: OutlineInputBorder(
+            //     borderRadius: BorderRadius.all(Radius.circular(10)),
+            //     borderSide: BorderSide.none,
+            //   ),
+            // ),
             items: list.map((e) {
               return DropdownMenuItem(
                 child: Text(
                   e,
                   style: TextStyle(
-                    color: Color.fromARGB(255, 164, 165, 167),
+                    color: accent ? Colors.white : Color(0xFFA4A5A7),
                     fontFamily: "Inter",
                     fontSize: 16,
                   ),
@@ -387,7 +591,7 @@ class _AdminDetailGameState extends State<AdminDetailGame> {
         isDense: true,
         isExpanded: true,
         padding: EdgeInsets.only(right: 14, left: 14, top: 14, bottom: 14),
-        icon: Icon(Icons.arrow_drop_down_circle),
+        icon: Icon(Icons.keyboard_arrow_down),
         iconDisabledColor: Color(0xFF4D1F00),
         iconEnabledColor: Color(0xFF4D1F00),
         menuMaxHeight: 200,
@@ -561,7 +765,7 @@ class _AdminDetailGameState extends State<AdminDetailGame> {
                     const SizedBox(
                       height: 12,
                     ),
-                    const Divider(color: Colors.black),
+                    const Divider(color: Color(0xFFA4A5A7)),
                     const SizedBox(
                       height: 12,
                     ),

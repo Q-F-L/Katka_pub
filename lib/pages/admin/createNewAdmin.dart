@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:katka/components/src/CityDropdownButtonFromField.dart';
+import 'package:katka/pages/admin/detailAdmin.dart';
 // import 'package:katka/components/src/dropdownButtonFromField.dart';
 
 class CreateNewAdmin extends StatefulWidget {
@@ -14,84 +15,106 @@ class _CreateNewAdminState extends State<CreateNewAdmin> {
 
   @override
   Widget build(BuildContext context) {
+    bool width = MediaQuery.of(context).size.width > 420;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Регистрация'),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.keyboard_arrow_left,
+            size: 35,
+          ),
+        ),
+        centerTitle: width ? true : false,
+        title: Text('Добавление администратора'),
         backgroundColor: Color.fromARGB(255, 41, 42, 44),
       ),
       backgroundColor: Theme.of(context).backgroundColor,
       body: Form(
-        child: ListView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SizedBox(
-              height: 12,
-            ),
-            textFromFieldCustom("Фамилия"),
-            SizedBox(
-              height: 12,
-            ),
-            textFromFieldCustom("Имя"),
-            SizedBox(
-              height: 12,
-            ),
-            textFromFieldCustom("Отчество (если есть)"),
-            SizedBox(
-              height: 12,
-            ),
-            textFromFieldCustom("Email"),
-            SizedBox(
-              height: 12,
-            ),
-            dropButtonFromField(list, "Город"),
-            SizedBox(
-              height: 12,
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 16),
-              child: TextFormField(
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      borderSide: BorderSide.none),
-                  filled: true,
-                  fillColor: Color.fromARGB(255, 41, 42, 44),
-                  hintText: "Пароль",
-                  hintStyle: TextStyle(
-                    color: Color.fromARGB(255, 164, 165, 167),
-                    fontFamily: "Inter",
-                    fontSize: 16,
+            Column(
+              children: [
+                SizedBox(
+                  height: 12,
+                ),
+                textFromFieldCustom("Фамилия"),
+                SizedBox(
+                  height: 12,
+                ),
+                textFromFieldCustom("Имя"),
+                SizedBox(
+                  height: 12,
+                ),
+                textFromFieldCustom("Отчество (если есть)"),
+                SizedBox(
+                  height: 12,
+                ),
+                textFromFieldCustom("Email"),
+                SizedBox(
+                  height: 12,
+                ),
+                dropButtonFromField(list, "Город"),
+                SizedBox(
+                  height: 12,
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 16),
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          borderSide: BorderSide.none),
+                      filled: true,
+                      fillColor: Color.fromARGB(255, 41, 42, 44),
+                      hintText: "Пароль",
+                      hintStyle: TextStyle(
+                        color: Color.fromARGB(255, 164, 165, 167),
+                        fontFamily: "Inter",
+                        fontSize: 16,
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-            SizedBox(
-              height: 12,
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: TextFormField(
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      borderSide: BorderSide.none),
-                  filled: true,
-                  fillColor: Color.fromARGB(255, 41, 42, 44),
-                  hintText: "Мобильный телефон",
-                  hintStyle: TextStyle(
-                    color: Color.fromARGB(255, 164, 165, 167),
-                    fontFamily: "Inter",
-                    fontSize: 16,
+                SizedBox(
+                  height: 12,
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          borderSide: BorderSide.none),
+                      filled: true,
+                      fillColor: Color.fromARGB(255, 41, 42, 44),
+                      hintText: "Мобильный телефон",
+                      hintStyle: TextStyle(
+                        color: Color.fromARGB(255, 164, 165, 167),
+                        fontFamily: "Inter",
+                        fontSize: 16,
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.17,
+              ],
             ),
             Container(
+              margin: EdgeInsets.only(bottom: 24),
+              alignment: Alignment.bottomCenter,
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const DetailAdmin()),
+                  );
+                },
                 style: ButtonStyle(
                   minimumSize: MaterialStateProperty.all(Size.fromHeight(50)),
                   shape: MaterialStateProperty.all(
