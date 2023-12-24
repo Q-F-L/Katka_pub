@@ -35,99 +35,27 @@ class _CreateRoundsFixState extends State<CreateRoundsFix> {
         children: [
           Container(
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 0.14,
-            padding: EdgeInsets.symmetric(vertical: 12),
+            height: 76,
+            margin: EdgeInsets.symmetric(vertical: 12),
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: [
                 SizedBox(
                   width: 24,
                 ),
-                Container(
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Color(0xFFF6BD1D),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  width: MediaQuery.of(context).size.width * 0.22,
-                  height: 100,
-                  child: Text(
-                    '1',
-                    style: TextStyle(
-                      color: Color(0xFF4D1F00),
-                      fontFamily: 'Inter',
-                      fontSize: MediaQuery.of(context).size.width * 0.055,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
+                listPointRounds("1", true),
                 SizedBox(
                   width: 12,
                 ),
-                Container(
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Color(0xFF292A2C),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  width: MediaQuery.of(context).size.width * 0.22,
-                  height: 100,
-                  child: Text(
-                    '2',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'Inter',
-                      fontSize: MediaQuery.of(context).size.width * 0.055,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
+                listPointRounds("2", false),
                 SizedBox(
                   width: 12,
                 ),
-                Container(
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Color(0xFF292A2C),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  width: MediaQuery.of(context).size.width * 0.22,
-                  height: 100,
-                  child: Text(
-                    '3',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'Inter',
-                      fontSize: MediaQuery.of(context).size.width * 0.055,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
+                listPointRounds("3", false),
                 SizedBox(
                   width: 12,
                 ),
-                Container(
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Color(0xFF292A2C),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  width: MediaQuery.of(context).size.width * 0.22,
-                  height: 100,
-                  child: Text(
-                    '4',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'Inter',
-                      fontSize: MediaQuery.of(context).size.width * 0.055,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
+                listPointRounds("4", false),
                 SizedBox(
                   width: 24,
                 ),
@@ -418,6 +346,11 @@ class _CreateRoundsFixState extends State<CreateRoundsFix> {
 
   Widget textFromFieldCustom(String? hintText) {
     return TextFormField(
+      style: TextStyle(
+                        color: Color.fromARGB(255, 164, 165, 167),
+                        fontFamily: "Inter",
+                        fontSize: 16,
+                      ),
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(8)),
@@ -519,6 +452,28 @@ class _CreateRoundsFixState extends State<CreateRoundsFix> {
             value: e,
           );
         }).toList(),
+      ),
+    );
+  }
+
+  Widget listPointRounds(String numb, bool active) {
+    return Container(
+      width: 76,
+      height: 76,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: active ? Color.fromARGB(255, 246, 188, 29) : Color(0xFF292A2C),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Text(
+        numb,
+        style: TextStyle(
+          color: active ? Color(0xFF4D1F00) : Colors.white,
+          fontFamily: 'Inter',
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
+        ),
+        textAlign: TextAlign.center,
       ),
     );
   }

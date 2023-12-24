@@ -239,6 +239,11 @@ class _ListRoundStatus extends State<ListRound> {
 
   Widget textFromFieldCustom(String? hintText) {
     return TextFormField(
+      style: TextStyle(
+                        color: Color.fromARGB(255, 164, 165, 167),
+                        fontFamily: "Inter",
+                        fontSize: 16,
+                      ),
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(8)),

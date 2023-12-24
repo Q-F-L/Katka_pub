@@ -52,7 +52,7 @@ class Katka extends StatelessWidget {
       themeMode: ThemeMode.dark,
       theme: lightTheme(),
       darkTheme: darkTheme(),
-      home: AdminMenu(),
+      home: AdminActiveGame(),
     );
   }
 }

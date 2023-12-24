@@ -97,6 +97,11 @@ class _CreateComandState extends State<CreateComand> {
               height: 12,
             ),
             TextFormField(
+              style: TextStyle(
+                        color: Color.fromARGB(255, 164, 165, 167),
+                        fontFamily: "Inter",
+                        fontSize: 16,
+                      ),
               decoration: const InputDecoration(
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -127,6 +132,11 @@ class _CreateComandState extends State<CreateComand> {
               height: 12,
             ),
             TextFormField(
+              style: TextStyle(
+                        color: Color.fromARGB(255, 164, 165, 167),
+                        fontFamily: "Inter",
+                        fontSize: 16,
+                      ),
               maxLines: 9,
               decoration: InputDecoration(
                 isDense: true,

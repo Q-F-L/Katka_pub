@@ -153,6 +153,11 @@ class _ComandState extends State<Comand> {
               height: 24,
             ),
             const TextField(
+              style: TextStyle(
+                        color: Color.fromARGB(255, 164, 165, 167),
+                        fontFamily: "Inter",
+                        fontSize: 16,
+                      ),
               maxLines: 9,
               decoration: InputDecoration(
                 isDense: true,

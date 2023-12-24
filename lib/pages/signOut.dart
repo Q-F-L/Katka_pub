@@ -63,6 +63,11 @@ class _SignOutState extends State<SignOut> {
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 16),
               child: TextFormField(
+                style: TextStyle(
+                  color: Color.fromARGB(255, 164, 165, 167),
+                  fontFamily: "Inter",
+                  fontSize: 16,
+                ),
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -84,6 +89,11 @@ class _SignOutState extends State<SignOut> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: TextFormField(
+                style: TextStyle(
+                  color: Color.fromARGB(255, 164, 165, 167),
+                  fontFamily: "Inter",
+                  fontSize: 16,
+                ),
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -229,6 +239,11 @@ class _SignOutState extends State<SignOut> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: TextFormField(
+        style: TextStyle(
+          color: Color.fromARGB(255, 164, 165, 167),
+          fontFamily: "Inter",
+          fontSize: 16,
+        ),
         decoration: InputDecoration(
           border: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(10)),

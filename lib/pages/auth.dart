@@ -60,7 +60,7 @@ class Auth extends StatelessWidget {
                     );
                   },
                   child: Text(
-                    'Регистарция',
+                    'Регистрация',
                     style: TextStyle(
                       fontFamily: "Inter",
                       fontSize: 16,

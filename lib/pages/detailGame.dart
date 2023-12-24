@@ -164,6 +164,11 @@ class _DetailGameState extends State<DetailGame> {
                   height: 4,
                 ),
                 const TextField(
+                  style: TextStyle(
+                        color: Color.fromARGB(255, 164, 165, 167),
+                        fontFamily: "Inter",
+                        fontSize: 16,
+                      ),
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -188,6 +193,11 @@ class _DetailGameState extends State<DetailGame> {
                   height: 4,
                 ),
                 const TextField(
+                  style: TextStyle(
+                        color: Color.fromARGB(255, 164, 165, 167),
+                        fontFamily: "Inter",
+                        fontSize: 16,
+                      ),
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -212,6 +222,11 @@ class _DetailGameState extends State<DetailGame> {
                   height: 4,
                 ),
                 const TextField(
+                  style: TextStyle(
+                        color: Color.fromARGB(255, 164, 165, 167),
+                        fontFamily: "Inter",
+                        fontSize: 16,
+                      ),
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -236,6 +251,11 @@ class _DetailGameState extends State<DetailGame> {
                   height: 4,
                 ),
                 const TextField(
+                  style: TextStyle(
+                        color: Color.fromARGB(255, 164, 165, 167),
+                        fontFamily: "Inter",
+                        fontSize: 16,
+                      ),
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -260,6 +280,11 @@ class _DetailGameState extends State<DetailGame> {
                   height: 4,
                 ),
                 const TextField(
+                  style: TextStyle(
+                        color: Color.fromARGB(255, 164, 165, 167),
+                        fontFamily: "Inter",
+                        fontSize: 16,
+                      ),
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -284,6 +309,11 @@ class _DetailGameState extends State<DetailGame> {
                   height: 4,
                 ),
                 const TextField(
+                  style: TextStyle(
+                        color: Color.fromARGB(255, 164, 165, 167),
+                        fontFamily: "Inter",
+                        fontSize: 16,
+                      ),
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -308,6 +338,11 @@ class _DetailGameState extends State<DetailGame> {
                   height: 4,
                 ),
                 const TextField(
+                  style: TextStyle(
+                        color: Color.fromARGB(255, 164, 165, 167),
+                        fontFamily: "Inter",
+                        fontSize: 16,
+                      ),
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -332,6 +367,11 @@ class _DetailGameState extends State<DetailGame> {
                   height: 4,
                 ),
                 const TextField(
+                  style: TextStyle(
+                        color: Color.fromARGB(255, 164, 165, 167),
+                        fontFamily: "Inter",
+                        fontSize: 16,
+                      ),
                   maxLines: 9,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(

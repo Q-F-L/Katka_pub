@@ -241,6 +241,11 @@ class _DetailPlayerState extends State<DetailPlayer> {
   Widget textFromFieldCustom(String? hintText) {
     return Container(
       child: TextFormField(
+        style: TextStyle(
+                        color: Color.fromARGB(255, 164, 165, 167),
+                        fontFamily: "Inter",
+                        fontSize: 16,
+                      ),
         decoration: InputDecoration(
           border: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(10)),

@@ -56,68 +56,61 @@ class _PersonalAccount extends State<PersonalAccount> {
             SizedBox(
               height: 24,
             ),
-            Flexible(
-              flex: 2,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const ListTeams()),
-                  );
-                },
-                child: Text(
-                  "Найти команду",
-                  style: TextStyle(
-                    fontFamily: "Inter",
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                    color: Color.fromARGB(255, 77, 31, 0),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ListTeams()),
+                );
+              },
+              child: Text(
+                "Найти команду",
+                style: TextStyle(
+                  fontFamily: "Inter",
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                  color: Color.fromARGB(255, 77, 31, 0),
+                ),
+              ),
+              style: ButtonStyle(
+                minimumSize: MaterialStateProperty.all(Size.fromHeight(50)),
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
-                style: ButtonStyle(
-                  minimumSize: MaterialStateProperty.all(Size.fromHeight(50)),
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                  ),
-                  backgroundColor: MaterialStateColor.resolveWith(
-                      (states) => Color.fromARGB(255, 246, 188, 29)),
-                ),
+                backgroundColor: MaterialStateColor.resolveWith(
+                    (states) => Color.fromARGB(255, 246, 188, 29)),
               ),
             ),
             SizedBox(
               height: 12,
             ),
-            Flexible(
-              flex: 2,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const CreateComand()),
-                  );
-                },
-                child: Text(
-                  "Создать команду",
-                  style: TextStyle(
-                    fontFamily: "Inter",
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                    color: Color.fromARGB(255, 77, 31, 0),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const CreateComand()),
+                );
+              },
+              child: Text(
+                "Создать команду",
+                style: TextStyle(
+                  fontFamily: "Inter",
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                  color: Color.fromARGB(255, 77, 31, 0),
+                ),
+              ),
+              style: ButtonStyle(
+                minimumSize: MaterialStateProperty.all(Size.fromHeight(50)),
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
-                style: ButtonStyle(
-                  minimumSize: MaterialStateProperty.all(Size.fromHeight(50)),
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                  ),
-                  backgroundColor: MaterialStateColor.resolveWith(
-                      (states) => Color.fromARGB(255, 246, 188, 29)),
-                ),
+                backgroundColor: MaterialStateColor.resolveWith(
+                    (states) => Color.fromARGB(255, 246, 188, 29)),
               ),
             ),
             SizedBox(
@@ -159,67 +152,61 @@ class _PersonalAccount extends State<PersonalAccount> {
             SizedBox(
               height: 24,
             ),
-            Flexible(
-              flex: 2,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const ListGame()),
-                  );
-                },
-                child: Text(
-                  "Игры",
-                  style: TextStyle(
-                    fontFamily: "Inter",
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                    color: Color.fromARGB(255, 77, 31, 0),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ListGame()),
+                );
+              },
+              child: Text(
+                "Игры",
+                style: TextStyle(
+                  fontFamily: "Inter",
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                  color: Color.fromARGB(255, 77, 31, 0),
+                ),
+              ),
+              style: ButtonStyle(
+                minimumSize: MaterialStateProperty.all(Size.fromHeight(50)),
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
-                style: ButtonStyle(
-                  minimumSize: MaterialStateProperty.all(Size.fromHeight(50)),
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                  ),
-                  backgroundColor: MaterialStateColor.resolveWith(
-                      (states) => Color.fromARGB(255, 246, 188, 29)),
-                ),
+                backgroundColor: MaterialStateColor.resolveWith(
+                    (states) => Color.fromARGB(255, 246, 188, 29)),
               ),
             ),
             SizedBox(
               height: 12,
             ),
-            Flexible(
-              flex: 2,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const EditUser()),
-                  );
-                },
-                child: Text(
-                  "Изменить личные данные",
-                  style: TextStyle(
-                    fontFamily: "Inter",
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                    color: Color.fromARGB(255, 77, 31, 0),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const EditUser()),
+                );
+              },
+              child: Text(
+                "Изменить личные данные",
+                style: TextStyle(
+                  fontFamily: "Inter",
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                  color: Color.fromARGB(255, 77, 31, 0),
+                ),
+              ),
+              style: ButtonStyle(
+                minimumSize: MaterialStateProperty.all(Size.fromHeight(50)),
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
-                style: ButtonStyle(
-                  minimumSize: MaterialStateProperty.all(Size.fromHeight(50)),
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                  ),
-                  backgroundColor: MaterialStateColor.resolveWith(
-                      (states) => Color.fromARGB(255, 246, 188, 29)),
-                ),
+                backgroundColor: MaterialStateColor.resolveWith(
+                    (states) => Color.fromARGB(255, 246, 188, 29)),
               ),
             ),
             SizedBox(

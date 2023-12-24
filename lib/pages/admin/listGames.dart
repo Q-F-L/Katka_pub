@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:katka/components/src/cordCustom.dart';
 import 'package:katka/components/src/demonstrationListElementGame.dart';
-import 'package:katka/components/src/listElement.dart';
-import 'package:katka/components/src/listElementComandRequest.dart';
-import 'package:katka/pages/activeGame.dart';
+import 'package:katka/pages/admin/activeGame.dart';
 import 'package:katka/pages/admin/createMap/createPointBatlle.dart';
+import 'package:katka/pages/admin/detailAdmin.dart';
 import 'package:katka/pages/admin/detailGame.dart';
 import 'package:katka/pages/detailsLastGame.dart';
 import 'package:katka/pages/detailsUpcomingGame.dart';
@@ -150,12 +148,12 @@ class _AdminListGames extends State<AdminListGames> {
             context,
             MaterialPageRoute(
               builder: (context) => 'Прошла' == state
-                  ? DetailsLastGame()
+                  ? AdminDetailGame()
                   : ('Активна' == state
-                      ? ActiveGame()
+                      ? AdminActiveGame()
                       : 'Запланирована' == state
-                          ? DetailsUpcomingGame()
-                          : DetailsUpcomingGame()),
+                          ? AdminDetailGame()
+                          : AdminDetailGame()),
             ));
       },
       child: Row(

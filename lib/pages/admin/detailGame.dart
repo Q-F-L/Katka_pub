@@ -111,6 +111,11 @@ class _AdminDetailGameState extends State<AdminDetailGame> {
                   height: 4,
                 ),
                 const TextField(
+                  style: TextStyle(
+                        color: Color.fromARGB(255, 164, 165, 167),
+                        fontFamily: "Inter",
+                        fontSize: 16,
+                      ),
                   maxLines: 9,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
@@ -392,62 +397,65 @@ class _AdminDetailGameState extends State<AdminDetailGame> {
   }
 
   Widget equipment() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          width: 76,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            color: Color(0xFF292A2C),
+    return SizedBox(
+      height: 76,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: [
+          Container(
+            width: 76,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              color: Color(0xFF292A2C),
+            ),
+            child: Image.asset('assets/png/gun.png'),
           ),
-          child: Image.asset('assets/png/gun.png'),
-        ),
-        SizedBox(
-          width: 12,
-        ),
-        Container(
-          width: 76,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            color: Color(0xFF292A2C),
+          SizedBox(
+            width: 12,
           ),
-          child: Image.asset('assets/png/rifle.png'),
-        ),
-        SizedBox(
-          width: 12,
-        ),
-        Container(
-          width: 76,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            color: Color(0xFF292A2C),
+          Container(
+            width: 76,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              color: Color(0xFF292A2C),
+            ),
+            child: Image.asset('assets/png/rifle.png'),
           ),
-          child: Image.asset('assets/png/granade.png'),
-        ),
-        SizedBox(
-          width: 12,
-        ),
-        Container(
-          width: 76,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            color: Color(0xFF292A2C),
+          SizedBox(
+            width: 12,
           ),
-          child: Image.asset('assets/png/first_aid_kit.png'),
-        ),
-        SizedBox(
-          width: 12,
-        ),
-        Container(
-          width: 76,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            color: Color(0xFF292A2C),
+          Container(
+            width: 76,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              color: Color(0xFF292A2C),
+            ),
+            child: Image.asset('assets/png/granade.png'),
           ),
-          child: Image.asset('assets/png/knife.png'),
-        ),
-      ],
+          SizedBox(
+            width: 12,
+          ),
+          Container(
+            width: 76,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              color: Color(0xFF292A2C),
+            ),
+            child: Image.asset('assets/png/first_aid_kit.png'),
+          ),
+          SizedBox(
+            width: 12,
+          ),
+          Container(
+            width: 76,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              color: Color(0xFF292A2C),
+            ),
+            child: Image.asset('assets/png/knife.png'),
+          ),
+        ],
+      ),
     );
   }
 
@@ -493,6 +501,11 @@ class _AdminDetailGameState extends State<AdminDetailGame> {
           height: 4,
         ),
         TextField(
+          style: TextStyle(
+                        color: Color.fromARGB(255, 164, 165, 167),
+                        fontFamily: "Inter",
+                        fontSize: 16,
+                      ),
           decoration: InputDecoration(
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
