@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:katka/pages/signIn.dart';
-import 'package:katka/pages/signOut.dart';
+import 'package:katka/pages/SignUp.dart';
 
 class Auth extends StatelessWidget {
   const Auth({super.key});
@@ -56,7 +56,7 @@ class Auth extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const SignOut()),
+                      MaterialPageRoute(builder: (context) => const SignUp()),
                     );
                   },
                   child: Text(

@@ -11,7 +11,7 @@ class AdminActiveGame extends StatefulWidget {
 class _AdminActiveGameState extends State<AdminActiveGame> {
   @override
   Widget build(BuildContext context) {
-    var expandexWidth = MediaQuery.of(context).size.width;
+    var expandexHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       body: Stack(
@@ -40,7 +40,7 @@ class _AdminActiveGameState extends State<AdminActiveGame> {
                       icon: Icon(
                         Icons.arrow_back_ios,
                         color: Color(0xFF1F2022),
-                        size: expandexWidth > 550 ? 35 : 25,
+                        size: expandexHeight > 550 ? 35 : 25,
                       ),
                     ),
                     Row(
@@ -52,13 +52,8 @@ class _AdminActiveGameState extends State<AdminActiveGame> {
                             margin: EdgeInsets.only(
                                 top: MediaQuery.of(context).size.height * 0.01),
                             padding: EdgeInsets.symmetric(
-                              horizontal:
-                                  MediaQuery.of(context).size.height > 550
-                                      ? 20
-                                      : 5,
-                              vertical: MediaQuery.of(context).size.height > 550
-                                  ? 20
-                                  : 10,
+                              horizontal: expandexHeight > 550 ? 20 : 5,
+                              vertical: expandexHeight > 550 ? 20 : 10,
                             ),
                             decoration: BoxDecoration(
                               color: Color.fromARGB(255, 41, 42, 44),
@@ -81,13 +76,8 @@ class _AdminActiveGameState extends State<AdminActiveGame> {
                             margin: EdgeInsets.only(
                                 top: MediaQuery.of(context).size.height * 0.01),
                             padding: EdgeInsets.symmetric(
-                              horizontal:
-                                  MediaQuery.of(context).size.height > 550
-                                      ? 20
-                                      : 5,
-                              vertical: MediaQuery.of(context).size.height > 550
-                                  ? 20
-                                  : 10,
+                              horizontal: expandexHeight > 550 ? 20 : 5,
+                              vertical: expandexHeight > 550 ? 20 : 10,
                             ),
                             decoration: BoxDecoration(
                               color: Color.fromARGB(255, 41, 42, 44),
@@ -136,12 +126,8 @@ class _AdminActiveGameState extends State<AdminActiveGame> {
                               borderRadius: BorderRadius.circular(8),
                             ),
                             alignment: Alignment.center,
-                            width: MediaQuery.of(context).size.height > 550
-                                ? 100
-                                : 70,
-                            height: MediaQuery.of(context).size.height > 550
-                                ? 100
-                                : 70,
+                            width: expandexHeight > 550 ? 100 : 70,
+                            height: expandexHeight > 550 ? 100 : 70,
                             child: Text(
                               'Статус',
                               style: TextStyle(
@@ -167,12 +153,8 @@ class _AdminActiveGameState extends State<AdminActiveGame> {
                             borderRadius: BorderRadius.circular(8),
                           ),
                           alignment: Alignment.center,
-                          width: MediaQuery.of(context).size.height > 550
-                              ? 100
-                              : 70,
-                          height: MediaQuery.of(context).size.height > 550
-                              ? 100
-                              : 70,
+                          width: expandexHeight > 550 ? 100 : 70,
+                          height: expandexHeight > 550 ? 100 : 70,
                           child: Text(
                             'Старт',
                             style: TextStyle(
@@ -195,12 +177,8 @@ class _AdminActiveGameState extends State<AdminActiveGame> {
                             borderRadius: BorderRadius.circular(8),
                           ),
                           alignment: Alignment.center,
-                          width: MediaQuery.of(context).size.height > 550
-                              ? 100
-                              : 70,
-                          height: MediaQuery.of(context).size.height > 550
-                              ? 100
-                              : 70,
+                          width: expandexHeight > 550 ? 100 : 70,
+                          height: expandexHeight > 550 ? 100 : 70,
                           child: Text(
                             'Продлить раунд',
                             style: TextStyle(
@@ -223,12 +201,8 @@ class _AdminActiveGameState extends State<AdminActiveGame> {
                             borderRadius: BorderRadius.circular(8),
                           ),
                           alignment: Alignment.center,
-                          width: MediaQuery.of(context).size.height > 550
-                              ? 100
-                              : 70,
-                          height: MediaQuery.of(context).size.height > 550
-                              ? 100
-                              : 70,
+                          width: expandexHeight > 550 ? 100 : 70,
+                          height: expandexHeight > 550 ? 100 : 70,
                           child: Text(
                             'Добавить т.и',
                             style: TextStyle(
@@ -251,12 +225,8 @@ class _AdminActiveGameState extends State<AdminActiveGame> {
                             borderRadius: BorderRadius.circular(8),
                           ),
                           alignment: Alignment.center,
-                          width: MediaQuery.of(context).size.height > 550
-                              ? 100
-                              : 70,
-                          height: MediaQuery.of(context).size.height > 550
-                              ? 100
-                              : 70,
+                          width: expandexHeight > 550 ? 100 : 70,
+                          height: expandexHeight > 550 ? 100 : 70,
                           child: Text(
                             'Пауза',
                             style: TextStyle(

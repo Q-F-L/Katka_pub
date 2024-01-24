@@ -34,6 +34,11 @@ ThemeData darkTheme() {
     // scaffoldBackgroundColor: AppColors.black,
     appBarTheme: const AppBarTheme(
       elevation: 0.1,
+      titleTextStyle: TextStyle(
+        color: Colors.white,
+        fontFamily: 'Inter',
+        fontSize: 20,
+      ),
     ),
     textTheme: darkTextTheme(),
   );

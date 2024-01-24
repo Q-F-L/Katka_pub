@@ -30,7 +30,7 @@ class _AdminListGames extends State<AdminListGames> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const CreatePointBatlle()),
+            MaterialPageRoute(builder: (context) => CreatePointBatlle()),
           );
         },
       ),

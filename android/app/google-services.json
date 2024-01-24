@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "914974456145",
+    "project_id": "katka-63f89",
+    "storage_bucket": "katka-63f89.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:914974456145:android:2ce45dd53b5ec298473b70",
+        "android_client_info": {
+          "package_name": "com.example.TestAppKatka"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBA8Adleke9bgUM3oGl0Cct5riy3FgnIwM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
