@@ -83,7 +83,6 @@ class _ListComands extends State<ListComands> {
         child: FutureBuilder<List<DocumentSnapshot>>(
             future: listCommandsStream(), // Run check for a single queryRow
             builder: (context, snapshot) {
-              print(snapshot.connectionState == ConnectionState.done);
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasData) {
                   return ListView.builder(
@@ -93,9 +92,6 @@ class _ListComands extends State<ListComands> {
                           snapshot.data![index]
                               .get(FirestoreConstantsCommand.commander),
                           snapshot.data![index]);
-
-                      print("List = ${commanderName}");
-
                       return Column(
                         children: [
                           ElementList(

@@ -100,8 +100,7 @@ class _ComandState extends State<Comand> {
     var snapshot = await _firebaseStorage.ref().child(
         command.first.get(FirestoreConstantsCommand.imageLogoPath) ?? '');
     String? downloadUrl = await snapshot.getDownloadURL();
-    imageLogoPath = downloadUrl;
-    return imageLogoPath.toString();
+    return downloadUrl.toString();
   }
 
   requestInCommand() async {
@@ -117,10 +116,9 @@ class _ComandState extends State<Comand> {
   Future<String> downloadImageCommand() async {
     final _firebaseStorage = FirebaseStorage.instance;
     var snapshot = await _firebaseStorage.ref().child(
-        command.first.get(FirestoreConstantsCommand.imageLogoPath) ?? '');
+        command.first.get(FirestoreConstantsCommand.imageCommandPath) ?? '');
     var downloadUrl = await snapshot.getDownloadURL();
-    imageCommandPath = downloadUrl;
-    return imageLogoPath.toString();
+    return downloadUrl.toString();
   }
 
   userList() {}
@@ -177,7 +175,6 @@ class _ComandState extends State<Comand> {
                     itemCount: command.length,
                     itemBuilder: (context, index) {
                       userStream();
-                      print(snapshot.data!.id);
                       List<dynamic> listCommand = command[index]
                           .get(FirestoreConstantsCommand.listPlayers);
                       int countCommand = listCommand.length;
@@ -195,6 +192,7 @@ class _ComandState extends State<Comand> {
                           FutureBuilder(
                               future: downloadImageLogo(),
                               builder: (context, snapshot) {
+                                print(snapshot.data);
                                 if (snapshot.connectionState ==
                                     ConnectionState.waiting) {
                                   return Image.asset(

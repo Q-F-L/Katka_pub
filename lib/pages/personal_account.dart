@@ -100,9 +100,9 @@ class _PersonalAccount extends State<PersonalAccount> {
                             } else if (snapshot.connectionState ==
                                 ConnectionState.done) {
                               if (snapshot.hasData) {
-                                if (imageUrl != null) {
+                                if (snapshot.data != null) {
                                   return Image.network(
-                                    imageUrl ?? '',
+                                    snapshot.data ?? '',
                                     width: MediaQuery.of(context).size.width *
                                         0.83,
                                     height:
@@ -115,7 +115,6 @@ class _PersonalAccount extends State<PersonalAccount> {
                                 return Image.asset('assets/png/avatar.png');
                               }
                             } else {
-                              print('${snapshot.error}');
                               return Image.asset('assets/png/avatar.png');
                             }
                           }),

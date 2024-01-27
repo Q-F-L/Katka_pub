@@ -37,6 +37,8 @@ class UserFirebase {
       this.nickname,
       this.rationgUser,
       this.photoUrl);
+  
+  
 
   //метод для регистрации
   // Future<String> signUp(

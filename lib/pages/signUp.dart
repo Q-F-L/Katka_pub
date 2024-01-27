@@ -155,7 +155,9 @@ class _SignUpState extends State<SignUp> {
                 .collection(FirestoreConstants.pathUserCollection)
                 .doc(user.user!.uid)
                 .set({
-              FirestoreConstantsCommand.city: imageUrl.toString(),
+              FirestoreConstants.photoUrl: imageUrl.toString(),
+              FirestoreConstants.nickname: nicknameTextInputController.text.trim(),
+              FirestoreConstants.rationgUser: '0',
               FirestoreConstants.surname:
                   surnameTextInputController.text.trim(),
               FirestoreConstants.name: nameTextInputController.text.trim(),
@@ -172,6 +174,8 @@ class _SignUpState extends State<SignUp> {
                 .collection(FirestoreConstants.pathUserCollection)
                 .doc(user.user!.uid)
                 .set({
+              FirestoreConstants.nickname: nicknameTextInputController.text.trim(),
+              FirestoreConstants.rationgUser: '0',
               FirestoreConstants.surname:
                   surnameTextInputController.text.trim(),
               FirestoreConstants.name: nameTextInputController.text.trim(),
@@ -187,8 +191,6 @@ class _SignUpState extends State<SignUp> {
         }
       }
     } on FirebaseAuthException catch (e) {
-      print("ERROR !!! " + e.code);
-
       if (e.code == 'email-already-in-use') {
         setState(() {
           text = "Такой email уже используется!";
@@ -214,12 +216,12 @@ class _SignUpState extends State<SignUp> {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.keyboard_arrow_left,
             size: 35,
           ),
         ),
-        title: Text('Регистрация'),
+        title: const Text('Регистрация'),
         backgroundColor: Color.fromARGB(255, 41, 42, 44),
       ),
       backgroundColor: Theme.of(context).backgroundColor,
@@ -233,42 +235,42 @@ class _SignUpState extends State<SignUp> {
             text != ""
                 ? Text(
                     text,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.red,
                     ),
                     textAlign: TextAlign.center,
                   )
                 : SizedBox(),
-            SizedBox(
+            const SizedBox(
               height: 12,
             ),
             addImage(),
-            SizedBox(
+            const SizedBox(
               height: 12,
             ),
             textFromFieldCustom("Ник", nicknameTextInputController),
-            SizedBox(
+            const SizedBox(
               height: 12,
             ),
             textFromFieldCustom("Фамилия", surnameTextInputController),
-            SizedBox(
+            const SizedBox(
               height: 12,
             ),
             textFromFieldCustom("Имя", nameTextInputController),
-            SizedBox(
+            const SizedBox(
               height: 12,
             ),
             textFromFieldCustom(
                 "Отчество (если есть)", patronymicTextInputController),
-            SizedBox(
+            const SizedBox(
               height: 12,
             ),
             textFromFieldCustom("Email", emailTextInputController),
-            SizedBox(
+            const SizedBox(
               height: 12,
             ),
             dropCityButtonFromField(list, "Город"),
-            SizedBox(
+            const SizedBox(
               height: 12,
             ),
             Container(

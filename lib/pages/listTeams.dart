@@ -177,7 +177,7 @@ class _ListTeams extends State<ListTeams> {
           ),
           Flexible(
             child: Text(
-              '${array.length + 1}',
+              '${array.length}',
               style: TextStyle(
                 color: Colors.white,
                 fontFamily: 'Inter',
