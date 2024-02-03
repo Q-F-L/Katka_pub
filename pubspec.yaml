@@ -49,6 +49,8 @@ dependencies:
   riverpod: ^2.4.9
   cached_network_image: ^3.3.1
   shimmer: ^3.0.0
+  open_file: ^3.3.2
+  path_provider: ^2.1.2
 
 
 dev_dependencies:
@@ -77,6 +79,7 @@ flutter:
   assets:
     - assets/
     - assets/png/
+    - assets/json/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

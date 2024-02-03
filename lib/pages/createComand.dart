@@ -149,15 +149,20 @@ class _CreateComandState extends State<CreateComand> {
         var permissionStatus = await Permission.storage.status;
         if (permissionStatus.isGranted) {
           //Select Image
-          var image = await _imagePicker.pickImage(source: ImageSource.gallery);
-          var file = File(image?.path ?? '');
+          try {
+            var image =
+                await _imagePicker.pickImage(source: ImageSource.gallery);
+            var file = File(image?.path ?? '');
 
-          if (image != null) {
-            setState(() {
-              imageCommandPathPhone = file;
-            });
-          } else {
-            print('No Image Path Received');
+            if (image != null) {
+              setState(() {
+                imageCommandPathPhone = file;
+              });
+            } else {
+              print('No Image Path Received');
+            }
+          } catch (e) {
+            print("Ожидание ответа");
           }
         } else {
           print('Permission not granted. Try Again with permission access');

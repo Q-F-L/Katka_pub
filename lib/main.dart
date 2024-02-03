@@ -1,5 +1,5 @@
+import 'dart:convert';
 import 'dart:io';
-
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -50,6 +50,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:riverpod/riverpod.dart';
+import 'package:path_provider/path_provider.dart';
 
 //ПОДКЛЮЧИТЬ БД
 //СОЗДАТЬ ТАБЛИЦ
@@ -79,7 +80,7 @@ class Katka extends StatelessWidget {
       themeMode: ThemeMode.dark,
       theme: lightTheme(),
       darkTheme: darkTheme(),
-      // home: ListTeams(),
+      // home: Json(),
       routes: {
         '/': (context) => const FirebaseStream(),
         '/home': (context) => const Auth(),
@@ -93,3 +94,31 @@ class Katka extends StatelessWidget {
     );
   }
 }
+
+// class Json extends StatelessWidget {
+//   const Json({super.key});
+
+//   Future<dynamic> jsonLop() async {
+//     final Directory directory = await getApplicationDocumentsDirectory();
+//     File file = File('${directory.path}/assets/json/russia.json');
+//     print(file.uri);
+//     final data = await file.readAsString();
+//     var decoded = jsonDecode(data);
+//     print(decoded);
+//     return decoded;
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//         body: FutureBuilder(
+//             future: jsonLop(),
+//             builder: (context, snapshot) {
+//               return Center(
+//                   child: Text(
+//                 '${snapshot.error}',
+//                 style: TextStyle(color: Colors.red),
+//               ));
+//             }));
+//   }
+// }

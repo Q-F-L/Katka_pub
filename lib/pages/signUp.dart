@@ -34,6 +34,7 @@ class _SignUpState extends State<SignUp> {
   TextEditingController typeTextInputController = TextEditingController();
   final fromKey = GlobalKey<FormState>();
   String text = "";
+  String commandId = "";
 
   @override
   void dispose() {
@@ -121,6 +122,14 @@ class _SignUpState extends State<SignUp> {
     });
   }
 
+  Future<List<DocumentSnapshot<Object?>>> commandStream() async {
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    final QuerySnapshot result = await firebaseFirestore
+        .collection(FirestoreConstantsCommand.pathCommandCollection)
+        .get();
+    return result.docs;
+  }
+
   Future<void> signUp() async {
     final navigator = Navigator.of(context);
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
@@ -156,15 +165,18 @@ class _SignUpState extends State<SignUp> {
                 .doc(user.user!.uid)
                 .set({
               FirestoreConstants.photoUrl: imageUrl.toString(),
-              FirestoreConstants.nickname: nicknameTextInputController.text.trim(),
+              FirestoreConstants.nickname:
+                  nicknameTextInputController.text.trim(),
               FirestoreConstants.rationgUser: '0',
               FirestoreConstants.surname:
                   surnameTextInputController.text.trim(),
               FirestoreConstants.name: nameTextInputController.text.trim(),
+              FirestoreConstants.email: emailTextInputController.text.trim(),
               FirestoreConstants.patronymic:
                   patronymicTextInputController.text.trim(),
               FirestoreConstants.city: city.toString().trim(),
               FirestoreConstants.command: command.toString().trim(),
+              FirestoreConstants.commandId: commandId,
               FirestoreConstants.type: FirestoreConstants.type,
               FirestoreConstants.uid: user.user!.uid,
               "createAt": DateTime.now().millisecondsSinceEpoch.toString(),
@@ -174,7 +186,8 @@ class _SignUpState extends State<SignUp> {
                 .collection(FirestoreConstants.pathUserCollection)
                 .doc(user.user!.uid)
                 .set({
-              FirestoreConstants.nickname: nicknameTextInputController.text.trim(),
+              FirestoreConstants.nickname:
+                  nicknameTextInputController.text.trim(),
               FirestoreConstants.rationgUser: '0',
               FirestoreConstants.surname:
                   surnameTextInputController.text.trim(),
@@ -474,43 +487,65 @@ class _SignUpState extends State<SignUp> {
         color: Color.fromARGB(255, 41, 42, 44),
         borderRadius: BorderRadius.circular(8),
       ),
-      child: DropdownButtonFormField(
-        menuMaxHeight: 200,
-        elevation: 0,
-        borderRadius: BorderRadius.circular(8),
-        dropdownColor: Color.fromARGB(255, 41, 42, 44),
-        hint: Text(
-          '$defaultValue',
-          style: TextStyle(
-            color: Color.fromARGB(255, 164, 165, 167),
-            fontFamily: "Inter",
-            fontSize: 16,
-          ),
+      child: FutureBuilder(
+          future: commandStream(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return DropButtonFromField('Загрузка...', []);
+            } else if (snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.hasData) {
+                return DropButtonFromField(defaultValue, snapshot.data);
+              } else {
+                return DropButtonFromField('${snapshot.error}', []);
+              }
+            } else if (snapshot.connectionState == ConnectionState.none) {
+              return Text('${snapshot.connectionState}');
+            } else {
+              return Text('${snapshot.connectionState}');
+            }
+          }),
+    );
+  }
+
+  Widget DropButtonFromField(String defaultValue,
+      [List<DocumentSnapshot<Object?>>? list]) {
+    return DropdownButtonFormField(
+      menuMaxHeight: 200,
+      elevation: 0,
+      borderRadius: BorderRadius.circular(8),
+      dropdownColor: Color.fromARGB(255, 41, 42, 44),
+      hint: Text(
+        defaultValue,
+        style: const TextStyle(
+          color: Color.fromARGB(255, 164, 165, 167),
+          fontFamily: "Inter",
+          fontSize: 16,
         ),
-        onChanged: (data) {
-          command = data;
-        },
-        decoration: InputDecoration(
-          fillColor: Color.fromARGB(255, 41, 42, 44),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-            borderSide: BorderSide.none,
-          ),
-        ),
-        items: list.map((e) {
-          return DropdownMenuItem(
-            child: Text(
-              e,
-              style: TextStyle(
-                color: Color.fromARGB(255, 164, 165, 167),
-                fontFamily: "Inter",
-                fontSize: 16,
-              ),
-            ),
-            value: e,
-          );
-        }).toList(),
       ),
+      onChanged: (data) {
+        command = data!.get(FirestoreConstantsCommand.name).toString();
+        commandId = data.get(FirestoreConstantsCommand.id).toString();
+      },
+      decoration: const InputDecoration(
+        fillColor: Color.fromARGB(255, 41, 42, 44),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderSide: BorderSide.none,
+        ),
+      ),
+      items: list!.map((e) {
+        return DropdownMenuItem(
+          value: e,
+          child: Text(
+            e.get(FirestoreConstantsCommand.name).toString(),
+            style: const TextStyle(
+              color: Color.fromARGB(255, 164, 165, 167),
+              fontFamily: "Inter",
+              fontSize: 16,
+            ),
+          ),
+        );
+      }).toList(),
     );
   }
 

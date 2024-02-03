@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:katka/components/src/CityDropdownButtonFromField.dart';
+import 'package:katka/global_value.dart';
 // import 'package:katka/components/src/dropdownButtonFromField.dart';
 
 class EditUser extends StatefulWidget {
@@ -10,8 +13,33 @@ class EditUser extends StatefulWidget {
 }
 
 class _EditUserState extends State<EditUser> {
-  List<String> list = ['Список', 'Список1', 'Список2', 'Список3'];
   String selectedItem = 'Список';
+  String? imageUrl;
+  File? imagePathPhone;
+  List<String> list = ['Список', 'Список1', 'Список2', 'Список3'];
+  TextEditingController nicknameTextInputController = TextEditingController();
+  TextEditingController emailTextInputController = TextEditingController();
+  TextEditingController surnameTextInputController = TextEditingController();
+  TextEditingController nameTextInputController = TextEditingController();
+  TextEditingController patronymicTextInputController = TextEditingController();
+  String? city = '';
+  String? command = '';
+  TextEditingController typeTextInputController = TextEditingController();
+  final fromKey = GlobalKey<FormState>();
+  String text = "";
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    nicknameTextInputController.text = userGlobal.nickname ?? '';
+    nameTextInputController.text = userGlobal.name ?? '';
+    emailTextInputController.text = userGlobal.email ?? '';
+    imageUrl = userGlobal.photoUrl ?? '';
+    surnameTextInputController.text = userGlobal.surname ?? '';
+    patronymicTextInputController.text = userGlobal.patronymic ?? '';
+    city = userGlobal.city ?? '';
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,89 +65,40 @@ class _EditUserState extends State<EditUser> {
               height: 12,
             ),
             editImage(),
-            SizedBox(
+            const SizedBox(
               height: 12,
             ),
-            textFromFieldCustom("Фамилия"),
-            SizedBox(
+            textFromFieldCustom("Ник", nicknameTextInputController),
+            const SizedBox(
               height: 12,
             ),
-            textFromFieldCustom("Имя"),
-            SizedBox(
+            textFromFieldCustom("Фамилия", surnameTextInputController),
+            const SizedBox(
               height: 12,
             ),
-            textFromFieldCustom("Отчество (если есть)"),
-            SizedBox(
+            textFromFieldCustom("Имя", nameTextInputController),
+            const SizedBox(
               height: 12,
             ),
-            textFromFieldCustom("Email"),
-            SizedBox(
+            textFromFieldCustom(
+                "Отчество (если есть)", patronymicTextInputController),
+            const SizedBox(
               height: 12,
             ),
-            dropButtonFromField(list, "Город"),
-            SizedBox(
+            textFromFieldCustom("Email", emailTextInputController),
+            const SizedBox(
               height: 12,
             ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 16),
-              child: TextFormField(
-                style: TextStyle(
-                        color: Color.fromARGB(255, 164, 165, 167),
-                        fontFamily: "Inter",
-                        fontSize: 16,
-                      ),
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      borderSide: BorderSide.none),
-                  filled: true,
-                  fillColor: Color.fromARGB(255, 41, 42, 44),
-                  hintText: "Пароль",
-                  hintStyle: TextStyle(
-                    color: Color.fromARGB(255, 164, 165, 167),
-                    fontFamily: "Inter",
-                    fontSize: 16,
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 12,
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: TextFormField(
-                style: TextStyle(
-                        color: Color.fromARGB(255, 164, 165, 167),
-                        fontFamily: "Inter",
-                        fontSize: 16,
-                      ),
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      borderSide: BorderSide.none),
-                  filled: true,
-                  fillColor: Color.fromARGB(255, 41, 42, 44),
-                  hintText: "Повторите пароль",
-                  hintStyle: TextStyle(
-                    color: Color.fromARGB(255, 164, 165, 167),
-                    fontFamily: "Inter",
-                    fontSize: 16,
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 12,
-            ),
-            dropButtonFromField(list, "Команды"),
+            dropCityButtonFromField(list, city ?? 'Город'),
             SizedBox(
               height: 24,
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  // userGlobal.editUser();
+                },
                 style: ButtonStyle(
                   minimumSize: MaterialStateProperty.all(Size.fromHeight(50)),
                   shape: MaterialStateProperty.all(
@@ -203,7 +182,7 @@ class _EditUserState extends State<EditUser> {
     );
   }
 
-  Widget dropButtonFromField(List<String> list, String defaultValue) {
+  Widget dropCityButtonFromField(List<String> list, String defaultValue) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
@@ -224,10 +203,7 @@ class _EditUserState extends State<EditUser> {
           ),
         ),
         onChanged: (data) {
-          print(data);
-          setState(() {
-            selectedItem = data as String;
-          });
+          city = data;
         },
         decoration: InputDecoration(
           fillColor: Color.fromARGB(255, 41, 42, 44),
@@ -253,15 +229,97 @@ class _EditUserState extends State<EditUser> {
     );
   }
 
-  Widget textFromFieldCustom(String? hintText) {
+  Widget dropCommandButtonFromField(List<String> list, String defaultValue) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16),
+      decoration: BoxDecoration(
+        color: Color.fromARGB(255, 41, 42, 44),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: DropdownButtonFormField(
+        menuMaxHeight: 200,
+        elevation: 0,
+        borderRadius: BorderRadius.circular(8),
+        dropdownColor: Color.fromARGB(255, 41, 42, 44),
+        hint: Text(
+          '$defaultValue',
+          style: TextStyle(
+            color: Color.fromARGB(255, 164, 165, 167),
+            fontFamily: "Inter",
+            fontSize: 16,
+          ),
+        ),
+        onChanged: (data) {
+          command = data;
+        },
+        decoration: InputDecoration(
+          fillColor: Color.fromARGB(255, 41, 42, 44),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderSide: BorderSide.none,
+          ),
+        ),
+        items: list.map((e) {
+          return DropdownMenuItem(
+            child: Text(
+              e,
+              style: TextStyle(
+                color: Color.fromARGB(255, 164, 165, 167),
+                fontFamily: "Inter",
+                fontSize: 16,
+              ),
+            ),
+            value: e,
+          );
+        }).toList(),
+      ),
+    );
+  }
+
+  Widget textEmailFromFieldCustom(
+      String? hintText, TextEditingController? emailTextInputController) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: TextFormField(
+        autocorrect: false,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        keyboardType: TextInputType.emailAddress,
+        controller: emailTextInputController,
         style: TextStyle(
-                        color: Color.fromARGB(255, 164, 165, 167),
-                        fontFamily: "Inter",
-                        fontSize: 16,
-                      ),
+          color: Color.fromARGB(255, 164, 165, 167),
+          fontFamily: "Inter",
+          fontSize: 16,
+        ),
+        decoration: InputDecoration(
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+              borderSide: BorderSide.none),
+          filled: true,
+          fillColor: Color.fromARGB(255, 41, 42, 44),
+          hintText: hintText,
+          hintStyle: TextStyle(
+            color: Color.fromARGB(255, 164, 165, 167),
+            fontFamily: "Inter",
+            fontSize: 16,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget textFromFieldCustom(String? hintText,
+      [TextEditingController? TextInputController]) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: TextFormField(
+        autocorrect: false,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        controller: TextInputController,
+        style: TextStyle(
+          color: Color.fromARGB(255, 164, 165, 167),
+          fontFamily: "Inter",
+          fontSize: 16,
+        ),
         decoration: InputDecoration(
           border: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(10)),

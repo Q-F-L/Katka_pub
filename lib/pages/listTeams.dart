@@ -41,7 +41,6 @@ class _ListTeams extends State<ListTeams> {
               data.get(FirestoreConstantsCommand.commander))
           .get(FirestoreConstants.name)
           .toString();
-      print(commanderName);
     }
 
     return Scaffold(
@@ -140,10 +139,7 @@ class _ListTeams extends State<ListTeams> {
       ),
       onPressed: () {
         commandGlobal.id = id;
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const Comand()),
-        );
+        Navigator.pushNamed(context, '/account');
       },
       child: Row(
         children: [
