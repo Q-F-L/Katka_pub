@@ -1,8 +1,4 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-import 'package:katka/global_value.dart';
-import 'package:katka/pages/comand.dart';
 
 Widget cardCustomButton(
     String subtext, String pretext, BuildContext context, String commandId) {
@@ -11,23 +7,23 @@ Widget cardCustomButton(
     children: [
       TextButton(
         style: ButtonStyle(
+          alignment: Alignment.centerLeft,
           elevation: MaterialStateProperty.all(0),
           padding: MaterialStateProperty.all(EdgeInsets.zero),
         ),
         onPressed: () {
-          // commandGlobal.id = commandId.toString();
           Navigator.pushNamed(context, "/command");
         },
         child: Text(
-          '$subtext',
-          style: TextStyle(
+          subtext,
+          style: const TextStyle(
             color: Color.fromARGB(255, 164, 165, 167),
             fontSize: 16,
           ),
         ),
       ),
       Container(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           vertical: 16,
           horizontal: 24,
         ),
@@ -40,7 +36,7 @@ Widget cardCustomButton(
         ),
         child: Row(
           children: [
-            Icon(
+            const Icon(
               Icons.stars,
               color: Color.fromARGB(255, 246, 188, 29),
             ),

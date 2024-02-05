@@ -41,7 +41,9 @@ class _PersonalAccount extends State<PersonalAccount> {
     }
     document = result.docs;
     userGlobal.city = result.docs.first.get(FirestoreConstants.city);
-    userGlobal.command = result.docs.first.get(FirestoreConstants.command);
+    userGlobal.commandName =
+        result.docs.first.get(FirestoreConstants.commandName);
+    userGlobal.commandId = result.docs.first.get(FirestoreConstants.commandId);
     userGlobal.photoUrl = result.docs.first.get(FirestoreConstants.photoUrl);
     userGlobal.name = result.docs.first.get(FirestoreConstants.name);
     userGlobal.email = result.docs.first.get(FirestoreConstants.email);
@@ -145,14 +147,14 @@ class _PersonalAccount extends State<PersonalAccount> {
                           height: 12,
                         ),
                         document[index]
-                                .get(FirestoreConstants.command)
+                                .get(FirestoreConstants.commandName)
                                 .toString()
                                 .isNotEmpty
                             ? cardCustomButton(
-                                '${document[index].get(FirestoreConstants.command)}',
+                                '${document[index].get(FirestoreConstants.commandName)}',
                                 'рейтинг 0',
                                 context,
-                                '${document[index].get(FirestoreConstants.command)}')
+                                '${document[index].get(FirestoreConstants.commandName)}')
                             : const SizedBox(),
                         const SizedBox(
                           height: 24,
@@ -354,7 +356,11 @@ class _PersonalAccount extends State<PersonalAccount> {
                   },
                 );
               } else {
-                return Text('${snapshot.error}');
+                return Center(
+                    child: Text(
+                  '${snapshot.error}',
+                  style: TextStyle(color: Colors.red),
+                ));
                 // False: Return UI element withouut Name and Avatar
               }
             } else if (snapshot.connectionState == ConnectionState.none) {

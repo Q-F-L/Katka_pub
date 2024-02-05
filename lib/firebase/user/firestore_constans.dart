@@ -6,7 +6,7 @@ class FirestoreConstants {
   static const name = "name";
   static const patronymic = "patronymic"; // no-require
   static const city = "city";
-  static const command = "command"; // no-require
+  static const commandName = "command"; // no-require
   static const commandId = "commandId"; // no-require
   static const type = "user";
   static const rationgUser = "rationgUser";

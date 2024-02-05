@@ -88,7 +88,7 @@ class Katka extends StatelessWidget {
         '/register': (context) => const SignUp(),
         '/account': (context) => const PersonalAccount(),
         '/command': (context) => const Comand(),
-        '/listCommands': (context) => const ListComands(),
+        '/listCommands': (context) => const ListTeams(),
         // '/imageUploade': (context) => ImageUpload(),
       },
     );

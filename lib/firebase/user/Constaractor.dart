@@ -14,7 +14,8 @@ class UserFirebase {
   String? uid;
   bool? emailVerified;
   String? city;
-  String? command;
+  String? commandName;
+  int? commandId;
   String? email;
   File? imageFile;
   String? name;
@@ -28,7 +29,8 @@ class UserFirebase {
   UserFirebase(
       this.uid,
       this.city,
-      this.command,
+      this.commandName,
+      this.commandId,
       this.email,
       this.imageFile,
       this.name,
@@ -240,7 +242,8 @@ class UserFirebase {
         .get();
 
     this.city = result.docs.first.get(FirestoreConstants.city);
-    this.command = result.docs.first.get(FirestoreConstants.command);
+    this.commandName = result.docs.first.get(FirestoreConstants.commandName);
+    this.commandId = result.docs.first.get(FirestoreConstants.commandId);
     this.name = result.docs.first.get(FirestoreConstants.name);
     this.patronymic = result.docs.first.get(FirestoreConstants.patronymic);
     this.photoUrl = result.docs.first.get(FirestoreConstants.photoUrl);

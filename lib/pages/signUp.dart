@@ -34,7 +34,7 @@ class _SignUpState extends State<SignUp> {
   TextEditingController typeTextInputController = TextEditingController();
   final fromKey = GlobalKey<FormState>();
   String text = "";
-  String commandId = "";
+  int? commandId;
 
   @override
   void dispose() {
@@ -109,17 +109,15 @@ class _SignUpState extends State<SignUp> {
   }
 
   uploadImage(String uid) async {
-    final _firebaseStorage = FirebaseStorage.instance;
+    final firebaseStorage = FirebaseStorage.instance;
     //Check Permissions
 
-    var snapshot = await _firebaseStorage
+    var snapshot = await firebaseStorage
         .ref()
         .child('images/$uid')
         .putFile(File(imagePathPhone?.path ?? ''));
     var downloadUrl = await snapshot.ref.getDownloadURL();
-    setState(() {
-      imageUrl = downloadUrl;
-    });
+    imageUrl = downloadUrl;
   }
 
   Future<List<DocumentSnapshot<Object?>>> commandStream() async {
@@ -138,9 +136,6 @@ class _SignUpState extends State<SignUp> {
 
     if (passwordRepeatTextInputController.text !=
         passwordTextInputController.text) {
-      setState(() {
-        text = "Пароли должны совпадать!";
-      });
     }
 
     try {
@@ -175,7 +170,7 @@ class _SignUpState extends State<SignUp> {
               FirestoreConstants.patronymic:
                   patronymicTextInputController.text.trim(),
               FirestoreConstants.city: city.toString().trim(),
-              FirestoreConstants.command: command.toString().trim(),
+              FirestoreConstants.commandName: command.toString().trim(),
               FirestoreConstants.commandId: commandId,
               FirestoreConstants.type: FirestoreConstants.type,
               FirestoreConstants.uid: user.user!.uid,
@@ -195,7 +190,8 @@ class _SignUpState extends State<SignUp> {
               FirestoreConstants.patronymic:
                   patronymicTextInputController.text.trim(),
               FirestoreConstants.city: city.toString().trim(),
-              FirestoreConstants.command: command.toString().trim(),
+              FirestoreConstants.commandName: command.toString().trim(),
+              FirestoreConstants.commandId: commandId,
               FirestoreConstants.type: FirestoreConstants.type,
               FirestoreConstants.uid: user.user!.uid,
               "createAt": DateTime.now().millisecondsSinceEpoch.toString(),
@@ -205,15 +201,8 @@ class _SignUpState extends State<SignUp> {
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
-        setState(() {
-          text = "Такой email уже используется!";
-        });
         return;
       } else {
-        setState(() {
-          text =
-              "Не известная ошибка! Попробуйте ещё раз позде или обратитесь в техподдержку.";
-        });
         return;
       }
     }
@@ -524,7 +513,7 @@ class _SignUpState extends State<SignUp> {
       ),
       onChanged: (data) {
         command = data!.get(FirestoreConstantsCommand.name).toString();
-        commandId = data.get(FirestoreConstantsCommand.id).toString();
+        commandId = data.get(FirestoreConstantsCommand.id);
       },
       decoration: const InputDecoration(
         fillColor: Color.fromARGB(255, 41, 42, 44),

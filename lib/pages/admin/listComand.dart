@@ -41,7 +41,6 @@ class _ListComands extends State<ListComands> {
               data.get(FirestoreConstantsCommand.commander))
           .get(FirestoreConstants.name)
           .toString();
-      print(commanderName);
     }
 
     return Scaffold(
@@ -64,7 +63,7 @@ class _ListComands extends State<ListComands> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.popAndPushNamed(context, '/account');
           },
           icon: Icon(
             Icons.keyboard_arrow_left,
@@ -134,8 +133,12 @@ class _ListComands extends State<ListComands> {
     );
   }
 
-  Widget ElementList(
-       [int? rating, String? commanderName, String? name, String? city,]) {
+  Widget ElementList([
+    int? rating,
+    String? commanderName,
+    String? name,
+    String? city,
+  ]) {
     return TextButton(
       style: ButtonStyle(
         elevation: MaterialStateProperty.all(0),

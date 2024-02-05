@@ -1,4 +1,4 @@
-class FirestoreConstants {
+class FirestoreConstantsAdmin {
   static const pathUserCollection = "Admin";
   static const photoUrl = "photoUrl"; // no-require
   static const uid = "id";

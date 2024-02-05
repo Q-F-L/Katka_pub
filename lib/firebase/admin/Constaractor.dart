@@ -9,7 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:katka/firebase/user/firestore_constans.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-class UserFirebase {
+class AdminFirebase {
   //все поля юзера
   String? uid;
   bool? emailVerified;
@@ -20,6 +20,6 @@ class UserFirebase {
   String? createAt;
   String? patronymic;
 
-  UserFirebase(this.uid, this.city, this.email, this.name, this.surname,
+  AdminFirebase(this.uid, this.city, this.email, this.name, this.surname,
       this.createAt, this.patronymic);
 }
