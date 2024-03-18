@@ -10,6 +10,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:katka/components/src/CityDropdownButtonFromField.dart';
 import 'package:katka/firebase/command/firestore_constans.dart';
+import 'package:katka/firebase/user/firestore_constans.dart';
 import 'package:katka/global_value.dart';
 import 'package:katka/pages/comand.dart';
 import 'package:katka/pages/comandCommander.dart';
@@ -57,42 +58,48 @@ class _CreateComandState extends State<CreateComand> {
           .collection(FirestoreConstantsCommand.pathCommandCollection)
           .doc("$random")
           .set({
-        FirestoreConstantsCommand.imageLogoPath: 'images/Logo$random',
-        FirestoreConstantsCommand.imageCommandPath: 'images/Command$random',
-        FirestoreConstantsCommand.city: city,
-        FirestoreConstantsCommand.colorUniform: color,
-        FirestoreConstantsCommand.country: country,
-        FirestoreConstantsCommand.name: commandTextInputController.text.trim(),
-        FirestoreConstantsCommand.type: "command",
-        FirestoreConstantsCommand.nameCommander: userGlobal.nickname,
-        FirestoreConstantsCommand.description:
-            descriptionTextInputController.text.trim(),
-        FirestoreConstantsCommand.id: random,
-        FirestoreConstantsCommand.listPlayers: [
-          FirebaseAuth.instance.currentUser!.uid
-        ],
-        FirestoreConstantsCommand.commander:
-            FirebaseAuth.instance.currentUser!.uid,
-        FirestoreConstantsCommand.rationgCommand: 0,
-        "createAt": DateTime.now().millisecondsSinceEpoch.toString(),
-      });
+            FirestoreConstantsCommand.imageLogoPath: 'images/Logo$random',
+            FirestoreConstantsCommand.imageCommandPath: 'images/Command$random',
+            FirestoreConstantsCommand.city: city,
+            FirestoreConstantsCommand.colorUniform: color,
+            FirestoreConstantsCommand.country: country,
+            FirestoreConstantsCommand.name:
+                commandTextInputController.text.trim(),
+            FirestoreConstantsCommand.type: "command",
+            FirestoreConstantsCommand.nameCommander: userGlobal.nickname,
+            FirestoreConstantsCommand.description:
+                descriptionTextInputController.text.trim(),
+            FirestoreConstantsCommand.id: random,
+            FirestoreConstantsCommand.listPlayers: [
+              FirebaseAuth.instance.currentUser!.uid
+            ],
+            FirestoreConstantsCommand.commander:
+                FirebaseAuth.instance.currentUser!.uid,
+            FirestoreConstantsCommand.rationgCommand: 0,
+            "createAt": DateTime.now().millisecondsSinceEpoch.toString(),
+          })
+          .then((value) => print("Command Create!"))
+          .catchError((error) => print("Failed to create command: $error"));
 
-      CollectionReference commandF = FirebaseFirestore.instance
-          .collection(FirestoreConstantsCommand.pathCommandCollection);
+      CollectionReference user = FirebaseFirestore.instance
+          .collection(FirestoreConstants.pathUserCollection);
 
-      // Future<void> commandA = commandF
-      //     .doc("$random")
-      //     .update({'company': 'Stokes and Sons'})
-      //     .then((value) => print("Command Updated"))
-      //     .catchError((error) => print("Failed to update command: $error"));
+      await user
+          .doc(userGlobal.uid)
+          .update({
+            FirestoreConstants.commandName:
+                commandTextInputController.text.trim(),
+            FirestoreConstants.commandId: commandGlobal.id,
+          })
+          .then((value) => print("Command Updated"))
+          .catchError((error) => print("Failed to update command: $error"));
     }
 
     navigator.pushNamedAndRemoveUntil('/command', (route) => false);
   }
 
   uploadImagePhoneLogo() async {
-    final _firebaseStorage = FirebaseStorage.instance;
-    final _imagePicker = ImagePicker();
+    final imagePicker = ImagePicker();
     //Check Permissions
 
     if (Platform.isAndroid) {
@@ -102,7 +109,7 @@ class _CreateComandState extends State<CreateComand> {
         var permissionStatus = await Permission.storage.status;
         if (permissionStatus.isGranted) {
           //Select Image
-          var image = await _imagePicker.pickImage(source: ImageSource.gallery);
+          var image = await imagePicker.pickImage(source: ImageSource.gallery);
           var file = File(image?.path ?? '');
 
           if (image != null) {
@@ -120,7 +127,7 @@ class _CreateComandState extends State<CreateComand> {
         var permissionStatus = await Permission.photos.status;
         if (permissionStatus.isGranted) {
           //Select Image
-          var image = await _imagePicker.pickImage(source: ImageSource.gallery);
+          var image = await imagePicker.pickImage(source: ImageSource.gallery);
           var file = File(image?.path ?? '');
 
           if (image != null) {
@@ -138,8 +145,7 @@ class _CreateComandState extends State<CreateComand> {
   }
 
   uploadImagePhoneCommand() async {
-    final _firebaseStorage = FirebaseStorage.instance;
-    final _imagePicker = ImagePicker();
+    final imagePicker = ImagePicker();
     //Check Permissions
 
     if (Platform.isAndroid) {
@@ -149,15 +155,20 @@ class _CreateComandState extends State<CreateComand> {
         var permissionStatus = await Permission.storage.status;
         if (permissionStatus.isGranted) {
           //Select Image
-          var image = await _imagePicker.pickImage(source: ImageSource.gallery);
-          var file = File(image?.path ?? '');
+          try {
+            var image =
+                await imagePicker.pickImage(source: ImageSource.gallery);
+            var file = File(image?.path ?? '');
 
-          if (image != null) {
-            setState(() {
-              imageCommandPathPhone = file;
-            });
-          } else {
-            print('No Image Path Received');
+            if (image != null) {
+              setState(() {
+                imageCommandPathPhone = file;
+              });
+            } else {
+              print('No Image Path Received');
+            }
+          } catch (e) {
+            print("Ожидание ответа");
           }
         } else {
           print('Permission not granted. Try Again with permission access');
@@ -167,7 +178,7 @@ class _CreateComandState extends State<CreateComand> {
         var permissionStatus = await Permission.photos.status;
         if (permissionStatus.isGranted) {
           //Select Image
-          var image = await _imagePicker.pickImage(source: ImageSource.gallery);
+          var image = await imagePicker.pickImage(source: ImageSource.gallery);
           var file = File(image?.path ?? '');
 
           if (image != null) {
@@ -185,11 +196,11 @@ class _CreateComandState extends State<CreateComand> {
   }
 
   uploadImageCommand() async {
-    final _firebaseStorage = FirebaseStorage.instance;
+    final firebaseStorage = FirebaseStorage.instance;
     //Check Permissions
 
     try {
-      var snapshot = await _firebaseStorage
+      var snapshot = await firebaseStorage
           .ref()
           .child('images/Command$random')
           .putFile(File(imageCommandPathPhone?.path ?? ''));
@@ -208,11 +219,11 @@ class _CreateComandState extends State<CreateComand> {
   }
 
   uploadImageLogo() async {
-    final _firebaseStorage = FirebaseStorage.instance;
+    final firebaseStorage = FirebaseStorage.instance;
     //Check Permissions
 
     try {
-      var snapshot = await _firebaseStorage
+      var snapshot = await firebaseStorage
           .ref()
           .child('images/Logo$random')
           .putFile(File(imageLogoPathPhone?.path ?? ''));

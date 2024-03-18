@@ -1,5 +1,5 @@
+import 'dart:convert';
 import 'dart:io';
-
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -50,12 +50,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:riverpod/riverpod.dart';
+import 'package:path_provider/path_provider.dart';
 
-// //ПОДКЛЮЧИТЬ БД
-// //СОЗДАТЬ ТАБЛИЦ
-// //АВТОРИЗАЦИЯ (РЕГИСТРАЦИЯ, ВХОД)
-// //ВЫВОД ДАННЫХ (самое долгое)
-// //СОЗДАНИЕ АДМИНА
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -79,7 +75,7 @@ class Katka extends StatelessWidget {
       themeMode: ThemeMode.dark,
       theme: lightTheme(),
       darkTheme: darkTheme(),
-      // home: ListTeams(),
+      // home: Json(),
       routes: {
         '/': (context) => const FirebaseStream(),
         '/home': (context) => const Auth(),
@@ -87,161 +83,173 @@ class Katka extends StatelessWidget {
         '/register': (context) => const SignUp(),
         '/account': (context) => const PersonalAccount(),
         '/command': (context) => const Comand(),
-        '/listCommands': (context) => const ListComands(),
+        '/listCommands': (context) => const ListTeams(),
         // '/imageUploade': (context) => ImageUpload(),
       },
     );
   }
 }
 
-// class ImageUpload extends StatefulWidget {
+
+
+// class MapScreen extends StatefulWidget {
+//   const MapScreen({super.key});
+
 //   @override
-//   _ImageUploadState createState() => _ImageUploadState();
+//   State<MapScreen> createState() => _MapScreenState();
 // }
 
-// class _ImageUploadState extends State<ImageUpload> {
-//   var image;
-//   File? imageUrl;
+// class _MapScreenState extends State<MapScreen> {
+//   late final YandexMapController _mapController;
+//   var _mapZoom = 0.0;
+
+//   @override
+//   void dispose() {
+//     _mapController.dispose();
+//     super.dispose();
+//   }
 
 //   @override
 //   Widget build(BuildContext context) {
-//     downloadImage();
 //     return Scaffold(
-//       backgroundColor: Colors.white,
-//       appBar: AppBar(
-//         title: Text(
-//           'Upload Image',
-//           style: TextStyle(color: Colors.black87, fontWeight: FontWeight.bold),
-//         ),
-//         centerTitle: true,
-//         elevation: 0.0,
-//         backgroundColor: Colors.white,
-//       ),
-//       body: Container(
-//         color: Colors.white,
-//         child: Column(
-//           children: <Widget>[
-//             Container(
-//                 margin: EdgeInsets.all(15),
-//                 padding: EdgeInsets.all(15),
-//                 decoration: BoxDecoration(
-//                   color: Colors.white,
-//                   borderRadius: BorderRadius.all(
-//                     Radius.circular(15),
-//                   ),
-//                   border: Border.all(color: Colors.white),
-//                   boxShadow: [
-//                     BoxShadow(
-//                       color: Colors.black12,
-//                       offset: Offset(2, 2),
-//                       spreadRadius: 2,
-//                       blurRadius: 1,
-//                     ),
-//                   ],
+//       appBar: AppBar(title: const Text('Yandex Mapkit Demo')),
+//       body: YandexMap(
+//         onMapCreated: (controller) async {
+//           _mapController = controller;
+//           // приближаем вид карты ближе к Европе
+//           await _mapController.moveCamera(
+//             CameraUpdate.newCameraPosition(
+//               const CameraPosition(
+//                 target: Point(
+//                   latitude: 50,
+//                   longitude: 20,
 //                 ),
-//                 child: (image != null)
-//                     ? Image.network(image!)
-//                     : Image.network('https://i.imgur.com/sUFH1Aq.png')),
-//             SizedBox(
-//               height: 20.0,
+//                 zoom: 3,
+//               ),
 //             ),
-//             ElevatedButton(
-//               child: Text("Upload Image",
-//                   style: TextStyle(
-//                       color: Colors.white,
-//                       fontWeight: FontWeight.bold,
-//                       fontSize: 20)),
-//               onPressed: () {
-//                 downloadImage();
-//               },
-//             ),
-//           ],
-//         ),
+//           );
+//         },
+//         onCameraPositionChanged: (cameraPosition, _, __) {
+//           setState(() {
+//             _mapZoom = cameraPosition.zoom;
+//           });
+//         },
+//         mapObjects: [
+//           _getClusterizedCollection(
+//             placemarks: _getPlacemarkObjects(context),
+//           ),
+//         ],
 //       ),
 //     );
 //   }
 
-  // var user = FirebaseAuth.instance.currentUser;
+//   /// Метод для получения коллекции кластеризованных маркеров
+//   ClusterizedPlacemarkCollection _getClusterizedCollection({
+//     required List<PlacemarkMapObject> placemarks,
+//   }) {
+//     return ClusterizedPlacemarkCollection(
+//         mapId: const MapObjectId('clusterized-1'),
+//         placemarks: placemarks,
+//         radius: 50,
+//         minZoom: 15,
+//         onClusterAdded: (self, cluster) async {
+//           return cluster.copyWith(
+//             appearance: cluster.appearance.copyWith(
+//               opacity: 1.0,
+//               icon: PlacemarkIcon.single(
+//                 PlacemarkIconStyle(
+//                     image: BitmapDescriptor.fromAssetImage(
+//                         'assets/png/avatar.png')),
+//               ),
+//             ),
+//           );
+//         },
+//         onClusterTap: (self, cluster) async {
+//           await _mapController.moveCamera(
+//             animation: const MapAnimation(
+//                 type: MapAnimationType.linear, duration: 0.3),
+//             CameraUpdate.newCameraPosition(
+//               CameraPosition(
+//                 target: cluster.placemarks.first.point,
+//                 zoom: _mapZoom + 1,
+//               ),
+//             ),
+//           );
+//         });
+//   }
+// }
 
-  // downloadImage() async {
-  //   final _firebaseStorage = FirebaseStorage.instance;
-  //   var snapshot = await _firebaseStorage.ref().child('images/${user!.uid}');
-  //   var downloadUrl = await snapshot.getDownloadURL();
-  //   setState(() {
-  //     image = downloadUrl;
-  //   });
-  // }
-  // uploadImage() async {
-  //   // UserCredential user = FirebaseAuth.instance;
-  //   final _firebaseStorage = FirebaseStorage.instance;
-  //   final _imagePicker = ImagePicker();
-  //   //Check Permissions
+// /// Метод для генерации точек на карте
+// List<MapPoint> _getMapPoints() {
+//   return [
+//     MapPoint(name: 'Москва', latitude: 55.755864, longitude: 37.617698),
+//     MapPoint(name: 'Лондон', latitude: 51.507351, longitude: -0.127696),
+//     MapPoint(name: 'Рим', latitude: 41.887064, longitude: 12.504809),
+//     MapPoint(name: 'Париж', latitude: 48.856663, longitude: 2.351556),
+//     MapPoint(name: 'Стокгольм', latitude: 59.347360, longitude: 18.341573),
+//   ];
+// }
 
-  //   if (Platform.isAndroid) {
-  //     var s = await Permission.storage.request();
+// class MapPoint {
+//   String? name;
+//   double? latitude;
+//   double? longitude;
 
-  //     final androidInfo = await DeviceInfoPlugin().androidInfo;
-  //     if (androidInfo.version.sdkInt <= 32) {
-  //       var permissionStatus = await Permission.storage.status;
-  //       if (permissionStatus.isGranted) {
-  //         //Select Image
-  //         var image =
-  //             await _imagePicker.pickImage(source: ImageSource.gallery);
-  //         var file = File(image?.path ?? '');
+//   MapPoint({String? name, double? latitude, double? longitude});
+// }
 
-  //         if (image != null) {
-  //           //Upload to Firebase
-  //           var snapshot = await _firebaseStorage
-  //               .ref()
-  //               .child('images/imageName')
-  //               .putFile(file);
-  //           var downloadUrl = await snapshot.ref.getDownloadURL();
-  //           setState(() {
-  //             imageUrl = downloadUrl;
-  //           });
-  //           setState(() {
-  //             imageUrl = file;
-  //           });
-  //           print(
-  //               "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!${imageUrl ?? ''}!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-  //         } else {
-  //           print('No Image Path Received');
-  //         }
-  //       } else {
-  //         print('Permission not granted. Try Again with permission access');
-  //       }
-  //     } else {
-  //       var s = await Permission.photos.request();
-  //       var permissionStatus = await Permission.photos.status;
-  //       if (permissionStatus.isGranted) {
-  //         //Select Image
-  //         var image =
-  //             await _imagePicker.pickImage(source: ImageSource.gallery);
-  //         var file = File(image?.path ?? '');
+// /// Метод для генерации объектов маркеров для отображения на карте
+// List<PlacemarkMapObject> _getPlacemarkObjects(BuildContext context) {
+//   print('_getPlacemarkObjects ');
+//   return _getMapPoints().map(
+//     (point) {
+//       return PlacemarkMapObject(
+//         mapId: MapObjectId('MapObject $point'),
+//         point: Point(latitude: 55.755864, longitude: 37.617698),
+//         opacity: 1,
+//         icon: PlacemarkIcon.single(
+//           PlacemarkIconStyle(
+//             image: BitmapDescriptor.fromAssetImage(
+//               'assets/png/avatar.png',
+//             ),
+//             scale: 2,
+//           ),
+//         ),
+//         // onTap: (_, __) => showModalBottomSheet(
+//         //   context: context,
+//         //   builder: (context) => _ModalBodyView(
+//         //     point: point,
+//         //   ),
+//         // ),
+//       );
+//     },
+//   ).toList();
+// }
 
-  //         if (image != null) {
-  //           //Upload to Firebase
-  //           // var snapshot = await _firebaseStorage
-  //           //     .ref()
-  //           //     .child('images/imageName')
-  //           //     .putFile(file);
-  //           // var downloadUrl = await snapshot.ref.getDownloadURL();
-  //           // setState(() {
-  //           //   imageUrl = downloadUrl;
-  //           // });
-  //           setState(() {
-  //             imageUrl = file;
-  //           });
-  //           print(
-  //               "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!${imageUrl ?? ''}!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-  //         } else {
-  //           print('No Image Path Received');
-  //         }
-  //       } else {
-  //         print('Permission not granted. Try Again with permission access');
-  //       }
-  //     }
-  //   }
-  // }
-  // }
+// /// Содержимое модального окна с информацией о точке на карте
+// class _ModalBodyView extends StatelessWidget {
+//   const _ModalBodyView({required this.point});
+
+//   final MapPoint point;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: const EdgeInsets.symmetric(vertical: 40),
+//       child: Column(
+//         mainAxisSize: MainAxisSize.min,
+//         children: [
+//           Text(point.name ?? '', style: const TextStyle(fontSize: 20)),
+//           const SizedBox(height: 20),
+//           Text(
+//             '${point.latitude}, ${point.longitude}',
+//             style: const TextStyle(
+//               fontSize: 16,
+//               color: Colors.grey,
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
 // }

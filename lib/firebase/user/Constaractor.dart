@@ -4,6 +4,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:katka/firebase/user/firestore_constans.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -13,7 +14,8 @@ class UserFirebase {
   String? uid;
   bool? emailVerified;
   String? city;
-  String? command;
+  String? commandName;
+  int? commandId;
   String? email;
   File? imageFile;
   String? name;
@@ -27,7 +29,8 @@ class UserFirebase {
   UserFirebase(
       this.uid,
       this.city,
-      this.command,
+      this.commandName,
+      this.commandId,
       this.email,
       this.imageFile,
       this.name,
@@ -37,6 +40,76 @@ class UserFirebase {
       this.nickname,
       this.rationgUser,
       this.photoUrl);
+  
+  // Future<void> editUser(BuildContext context, GlobalKey<FormState> fromKey, String email) async {
+  //   final navigator = Navigator.of(context);
+  //   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  //   final isValid = fromKey.currentState!.validate();
+  //   if (!isValid) return;
+
+  //   try {
+      
+
+  //       final QuerySnapshot result = await firebaseFirestore
+  //           .collection(FirestoreConstants.pathUserCollection)
+  //           .where(FirestoreConstants.uid, isEqualTo: uid)
+  //           .get();
+
+  //       final List<DocumentSnapshot> document = result.docs;
+
+  //       if (document.length == 0) {
+  //         if (imagePathPhone!.path.isNotEmpty) {
+  //           uploadImage(user.user!.uid);
+  //           firebaseFirestore
+  //               .collection(FirestoreConstants.pathUserCollection)
+  //               .doc(user.user!.uid)
+  //               .set({
+  //             FirestoreConstants.photoUrl: imageUrl.toString(),
+  //             FirestoreConstants.nickname: nicknameTextInputController.text.trim(),
+  //             FirestoreConstants.rationgUser: '0',
+  //             FirestoreConstants.surname:
+  //                 surnameTextInputController.text.trim(),
+  //             FirestoreConstants.name: nameTextInputController.text.trim(),
+  //             FirestoreConstants.patronymic:
+  //                 patronymicTextInputController.text.trim(),
+  //             FirestoreConstants.city: city.toString().trim(),
+  //             FirestoreConstants.command: command.toString().trim(),
+  //             FirestoreConstants.type: FirestoreConstants.type,
+  //             FirestoreConstants.uid: user.user!.uid,
+  //             "createAt": DateTime.now().millisecondsSinceEpoch.toString(),
+  //           });
+  //         } else {
+  //           firebaseFirestore
+  //               .collection(FirestoreConstants.pathUserCollection)
+  //               .doc(user.user!.uid)
+  //               .set({
+  //             FirestoreConstants.nickname: nicknameTextInputController.text.trim(),
+  //             FirestoreConstants.rationgUser: '0',
+  //             FirestoreConstants.surname:
+  //                 surnameTextInputController.text.trim(),
+  //             FirestoreConstants.name: nameTextInputController.text.trim(),
+  //             FirestoreConstants.patronymic:
+  //                 patronymicTextInputController.text.trim(),
+  //             FirestoreConstants.city: city.toString().trim(),
+  //             FirestoreConstants.command: command.toString().trim(),
+  //             FirestoreConstants.type: FirestoreConstants.type,
+  //             FirestoreConstants.uid: user.user!.uid,
+  //             "createAt": DateTime.now().millisecondsSinceEpoch.toString(),
+  //           });
+  //         }
+  //       }
+  //   } on FirebaseAuthException catch (e) {
+  //     if (e.code == 'email-already-in-use') {
+  //         print("Такой email уже используется!");
+  //       return;
+  //     } else {
+  //       print("Не известная ошибка! Попробуйте ещё раз позде или обратитесь в техподдержку.");
+  //       return;
+  //     }
+  //   }
+
+  //   navigator.pushNamed('/login');
+  // }
 
   //метод для регистрации
   // Future<String> signUp(
@@ -169,7 +242,8 @@ class UserFirebase {
         .get();
 
     this.city = result.docs.first.get(FirestoreConstants.city);
-    this.command = result.docs.first.get(FirestoreConstants.command);
+    this.commandName = result.docs.first.get(FirestoreConstants.commandName);
+    this.commandId = result.docs.first.get(FirestoreConstants.commandId);
     this.name = result.docs.first.get(FirestoreConstants.name);
     this.patronymic = result.docs.first.get(FirestoreConstants.patronymic);
     this.photoUrl = result.docs.first.get(FirestoreConstants.photoUrl);
@@ -207,7 +281,7 @@ class UserFirebase {
       if (e.code == 'user-not-found' || e.code == 'wrong-password') {
         return "Вы ввели недействительные данные";
       } else {
-        return "Не известная ошибка! Попробуйте ещё раз позде или обратитесь в техподдержку. ${e.message}";
+        return "Не известная ошибка! Попробуйте ещё раз позже или обратитесь в техподдержку. ${e.message}";
       }
     }
 

@@ -35,11 +35,18 @@ class _PersonalAccount extends State<PersonalAccount> {
         .collection(FirestoreConstants.pathUserCollection)
         .where(FirestoreConstants.uid, isEqualTo: user!.uid)
         .get();
+    if (result.size < 1) {
+      signOut();
+      return result.docs.isEmpty;
+    }
     document = result.docs;
     userGlobal.city = result.docs.first.get(FirestoreConstants.city);
-    userGlobal.command = result.docs.first.get(FirestoreConstants.command);
+    userGlobal.commandName =
+        result.docs.first.get(FirestoreConstants.commandName);
+    userGlobal.commandId = result.docs.first.get(FirestoreConstants.commandId);
     userGlobal.photoUrl = result.docs.first.get(FirestoreConstants.photoUrl);
     userGlobal.name = result.docs.first.get(FirestoreConstants.name);
+    userGlobal.email = result.docs.first.get(FirestoreConstants.email);
     userGlobal.nickname = result.docs.first.get(FirestoreConstants.nickname);
     userGlobal.surname = result.docs.first.get(FirestoreConstants.surname);
     userGlobal.patronymic =
@@ -82,264 +89,284 @@ class _PersonalAccount extends State<PersonalAccount> {
               false, // You can set initial data or check snapshot.hasData in the builder
           future: userStream(), // Run check for a single queryRow
           builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return ListView.builder(
-                itemCount: document.length,
-                itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      FutureBuilder(
-                          future: downloadImage(),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return Image.asset('assets/png/avatar.png');
-                            } else if (snapshot.connectionState ==
-                                ConnectionState.done) {
-                              if (snapshot.hasData) {
-                                if (imageUrl != null) {
-                                  return Image.network(
-                                    imageUrl ?? '',
-                                    width: MediaQuery.of(context).size.width *
-                                        0.83,
-                                    height:
-                                        MediaQuery.of(context).size.width * 0.6,
-                                  );
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: Text(
+                  'Загрузка...',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+              );
+            } else if (snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.hasData) {
+                return ListView.builder(
+                  itemCount: document.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        FutureBuilder(
+                            future: downloadImage(),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return Image.asset('assets/png/avatar.png');
+                              } else if (snapshot.connectionState ==
+                                  ConnectionState.done) {
+                                if (snapshot.hasData) {
+                                  if (snapshot.data != null) {
+                                    return Image.network(
+                                      snapshot.data ?? '',
+                                      width: MediaQuery.of(context).size.width *
+                                          0.83,
+                                      height:
+                                          MediaQuery.of(context).size.width *
+                                              0.6,
+                                    );
+                                  } else {
+                                    return Image.asset('assets/png/avatar.png');
+                                  }
                                 } else {
                                   return Image.asset('assets/png/avatar.png');
                                 }
                               } else {
                                 return Image.asset('assets/png/avatar.png');
                               }
-                            } else {
-                              print('${snapshot.error}');
-                              return Image.asset('assets/png/avatar.png');
-                            }
-                          }),
-                      SizedBox(
-                        height: 12,
-                      ),
-                      cardCustom(
-                        '${document[index].get(FirestoreConstants.name)}',
-                        'рейтинг 0',
-                        // 'рейтинг ${document[0].exists ? document[0].get(FirestoreConstants.rationgUser) : ''}',
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      document[index]
-                              .get(FirestoreConstants.command)
-                              .toString()
-                              .isNotEmpty
-                          ? cardCustom(
-                              '${document[index].get(FirestoreConstants.command)}',
-                              'рейтинг 0')
-                          : const SizedBox(),
-                      const SizedBox(
-                        height: 24,
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const ListTeams()),
-                          );
-                        },
-                        style: ButtonStyle(
-                          minimumSize:
-                              MaterialStateProperty.all(Size.fromHeight(50)),
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
+                            }),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        cardCustom(
+                          '${document[index].get(FirestoreConstants.nickname)}',
+                          'рейтинг 0',
+                          // 'рейтинг ${document[0].exists ? document[0].get(FirestoreConstants.rationgUser) : ''}',
+                        ),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        document[index]
+                                .get(FirestoreConstants.commandName)
+                                .toString()
+                                .isNotEmpty
+                            ? cardCustomButton(
+                                '${document[index].get(FirestoreConstants.commandName)}',
+                                'рейтинг 0',
+                                context,
+                                '${document[index].get(FirestoreConstants.commandName)}')
+                            : const SizedBox(),
+                        const SizedBox(
+                          height: 24,
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const ListTeams()),
+                            );
+                          },
+                          style: ButtonStyle(
+                            minimumSize:
+                                MaterialStateProperty.all(Size.fromHeight(50)),
+                            shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                            ),
+                            backgroundColor: MaterialStateColor.resolveWith(
+                                (states) => Color.fromARGB(255, 246, 188, 29)),
+                          ),
+                          child: const Text(
+                            "Найти команду",
+                            style: TextStyle(
+                              fontFamily: "Inter",
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                              color: Color.fromARGB(255, 77, 31, 0),
                             ),
                           ),
-                          backgroundColor: MaterialStateColor.resolveWith(
-                              (states) => Color.fromARGB(255, 246, 188, 29)),
                         ),
-                        child: const Text(
-                          "Найти команду",
-                          style: TextStyle(
-                            fontFamily: "Inter",
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                            color: Color.fromARGB(255, 77, 31, 0),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const CreateComand()),
+                            );
+                          },
+                          style: ButtonStyle(
+                            minimumSize:
+                                MaterialStateProperty.all(Size.fromHeight(50)),
+                            shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                            ),
+                            backgroundColor: MaterialStateColor.resolveWith(
+                                (states) => Color.fromARGB(255, 246, 188, 29)),
                           ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const CreateComand()),
-                          );
-                        },
-                        style: ButtonStyle(
-                          minimumSize:
-                              MaterialStateProperty.all(Size.fromHeight(50)),
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
+                          child: const Text(
+                            "Создать команду",
+                            style: TextStyle(
+                              fontFamily: "Inter",
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                              color: Color.fromARGB(255, 77, 31, 0),
                             ),
                           ),
-                          backgroundColor: MaterialStateColor.resolveWith(
-                              (states) => Color.fromARGB(255, 246, 188, 29)),
                         ),
-                        child: const Text(
-                          "Создать команду",
-                          style: TextStyle(
-                            fontFamily: "Inter",
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                            color: Color.fromARGB(255, 77, 31, 0),
-                          ),
+                        SizedBox(
+                          height: 24,
                         ),
-                      ),
-                      SizedBox(
-                        height: 24,
-                      ),
-                      Text(
-                        'Прошедшие игры',
-                        style: TextStyle(color: Colors.white, fontSize: 20),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(
-                        height: 12,
-                      ),
-                      listPredGame1(),
-                      SizedBox(
-                        height: 24,
-                      ),
-                      Text(
-                        'Предстоящие игры',
-                        style: TextStyle(color: Colors.white, fontSize: 20),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(
-                        height: 12,
-                      ),
-                      listPredGame2(),
-                      SizedBox(
-                        height: 24,
-                      ),
-                      Text(
-                        'Бонусы',
-                        style: TextStyle(color: Colors.white, fontSize: 20),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(
-                        height: 12,
-                      ),
-                      listPredGame3(),
-                      SizedBox(
-                        height: 24,
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const ListGame()),
-                          );
-                        },
-                        child: Text(
-                          "Игры",
-                          style: TextStyle(
-                            fontFamily: "Inter",
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                            color: Color.fromARGB(255, 77, 31, 0),
-                          ),
+                        Text(
+                          'Прошедшие игры',
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                          textAlign: TextAlign.center,
                         ),
-                        style: ButtonStyle(
-                          minimumSize:
-                              MaterialStateProperty.all(Size.fromHeight(50)),
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        listPredGame1(),
+                        SizedBox(
+                          height: 24,
+                        ),
+                        Text(
+                          'Предстоящие игры',
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        listPredGame2(),
+                        SizedBox(
+                          height: 24,
+                        ),
+                        Text(
+                          'Бонусы',
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        listPredGame3(),
+                        SizedBox(
+                          height: 24,
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const ListGame()),
+                            );
+                          },
+                          child: Text(
+                            "Игры",
+                            style: TextStyle(
+                              fontFamily: "Inter",
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                              color: Color.fromARGB(255, 77, 31, 0),
                             ),
                           ),
-                          backgroundColor: MaterialStateColor.resolveWith(
-                              (states) => Color.fromARGB(255, 246, 188, 29)),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 12,
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const EditUser()),
-                          );
-                        },
-                        child: Text(
-                          "Изменить личные данные",
-                          style: TextStyle(
-                            fontFamily: "Inter",
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                            color: Color.fromARGB(255, 77, 31, 0),
+                          style: ButtonStyle(
+                            minimumSize:
+                                MaterialStateProperty.all(Size.fromHeight(50)),
+                            shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                            ),
+                            backgroundColor: MaterialStateColor.resolveWith(
+                                (states) => Color.fromARGB(255, 246, 188, 29)),
                           ),
                         ),
-                        style: ButtonStyle(
-                          minimumSize:
-                              MaterialStateProperty.all(Size.fromHeight(50)),
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const EditUser()),
+                            );
+                          },
+                          child: Text(
+                            "Изменить личные данные",
+                            style: TextStyle(
+                              fontFamily: "Inter",
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                              color: Color.fromARGB(255, 77, 31, 0),
                             ),
                           ),
-                          backgroundColor: MaterialStateColor.resolveWith(
-                              (states) => Color.fromARGB(255, 246, 188, 29)),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 24,
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          signOut();
-                        },
-                        child: Text(
-                          "Выйти из аккаунта",
-                          style: TextStyle(
-                            fontFamily: "Inter",
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                            color: Color.fromARGB(255, 77, 31, 0),
+                          style: ButtonStyle(
+                            minimumSize:
+                                MaterialStateProperty.all(Size.fromHeight(50)),
+                            shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                            ),
+                            backgroundColor: MaterialStateColor.resolveWith(
+                                (states) => Color.fromARGB(255, 246, 188, 29)),
                           ),
                         ),
-                        style: ButtonStyle(
-                          minimumSize:
-                              MaterialStateProperty.all(Size.fromHeight(50)),
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
+                        SizedBox(
+                          height: 24,
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            signOut();
+                          },
+                          child: Text(
+                            "Выйти из аккаунта",
+                            style: TextStyle(
+                              fontFamily: "Inter",
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                              color: Color.fromARGB(255, 77, 31, 0),
                             ),
                           ),
-                          backgroundColor: MaterialStateColor.resolveWith(
-                              (states) => Color.fromARGB(255, 246, 29, 29)),
+                          style: ButtonStyle(
+                            minimumSize:
+                                MaterialStateProperty.all(Size.fromHeight(50)),
+                            shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                            ),
+                            backgroundColor: MaterialStateColor.resolveWith(
+                                (states) => Color.fromARGB(255, 246, 29, 29)),
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 12,
-                      ),
-                    ],
-                  );
-                },
-              );
+                        SizedBox(
+                          height: 12,
+                        ),
+                      ],
+                    );
+                  },
+                );
+              } else {
+                return Center(
+                    child: Text(
+                  '${snapshot.error}',
+                  style: TextStyle(color: Colors.red),
+                ));
+                // False: Return UI element withouut Name and Avatar
+              }
+            } else if (snapshot.connectionState == ConnectionState.none) {
+              return Text('null');
             } else {
-              return Text('${snapshot.error}');
-              // False: Return UI element withouut Name and Avatar
+              return Text('not connaction');
             }
           },
         ),

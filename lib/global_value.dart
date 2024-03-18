@@ -6,6 +6,6 @@ import 'package:katka/firebase/command/Constractor.dart';
 import 'package:katka/firebase/user/Constaractor.dart';
 
 UserFirebase userGlobal =
-    UserFirebase('', '', '', '', File(''), '', '', '', '', '', '', '');
+    UserFirebase('', '', '', null ,'', File(''), '', '', '', '', '', '', '');
 CommandFireStore commandGlobal =
     CommandFireStore(null, '', '', '', '', '', '', '', '', [], '');

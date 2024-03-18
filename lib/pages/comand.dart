@@ -18,7 +18,6 @@ class Comand extends StatefulWidget {
 }
 
 class _ComandState extends State<Comand> {
-  List<DocumentSnapshot> commander = [];
   List<DocumentSnapshot> command = [];
   List<DocumentSnapshot> user = [];
 
@@ -40,18 +39,17 @@ class _ComandState extends State<Comand> {
     return result.docs;
   }
 
-  userStream() async {
-    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-    commandStream();
-    String commanderUid =
-        command.first.get(FirestoreConstantsCommand.commander);
-    print(commanderUid);
-    final QuerySnapshot result = await firebaseFirestore
-        .collection(FirestoreConstants.pathUserCollection)
-        .where(FirestoreConstants.uid, isEqualTo: commanderUid)
-        .get();
-    commander = result.docs;
-  }
+  // userStream() async {
+  //   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  //   commandStream();
+  //   String commanderUid =
+  //       command.first.get(FirestoreConstantsCommand.commander);
+  //   print(commanderUid);
+  //   final QuerySnapshot result = await firebaseFirestore
+  //       .collection(FirestoreConstants.pathUserCollection)
+  //       .where(FirestoreConstants.uid, isEqualTo: commanderUid)
+  //       .get();
+  // }
 
   //получить командира
 
@@ -100,8 +98,7 @@ class _ComandState extends State<Comand> {
     var snapshot = await _firebaseStorage.ref().child(
         command.first.get(FirestoreConstantsCommand.imageLogoPath) ?? '');
     String? downloadUrl = await snapshot.getDownloadURL();
-    imageLogoPath = downloadUrl;
-    return imageLogoPath.toString();
+    return downloadUrl.toString();
   }
 
   requestInCommand() async {
@@ -117,25 +114,10 @@ class _ComandState extends State<Comand> {
   Future<String> downloadImageCommand() async {
     final _firebaseStorage = FirebaseStorage.instance;
     var snapshot = await _firebaseStorage.ref().child(
-        command.first.get(FirestoreConstantsCommand.imageLogoPath) ?? '');
+        command.first.get(FirestoreConstantsCommand.imageCommandPath) ?? '');
     var downloadUrl = await snapshot.getDownloadURL();
-    imageCommandPath = downloadUrl;
-    return imageLogoPath.toString();
+    return downloadUrl.toString();
   }
-
-  userList() {}
-
-  // userCommander() async {
-  //   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-  //   final QuerySnapshot result = await firebaseFirestore
-  //       .collection(FirestoreConstantsCommand.pathCommandCollection)
-  //       .where(FirestoreConstantsCommand.id,
-  //           isEqualTo: command.first
-  //               .get(FirestoreConstantsCommand.commander)
-  //               .toString())
-  //       .get();
-  //   user = result.docs;
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -176,8 +158,6 @@ class _ComandState extends State<Comand> {
                   return ListView.builder(
                     itemCount: command.length,
                     itemBuilder: (context, index) {
-                      userStream();
-                      print(snapshot.data!.id);
                       List<dynamic> listCommand = command[index]
                           .get(FirestoreConstantsCommand.listPlayers);
                       int countCommand = listCommand.length;
@@ -195,6 +175,7 @@ class _ComandState extends State<Comand> {
                           FutureBuilder(
                               future: downloadImageLogo(),
                               builder: (context, snapshot) {
+                                print(snapshot.data);
                                 if (snapshot.connectionState ==
                                     ConnectionState.waiting) {
                                   return Image.asset(
@@ -327,7 +308,7 @@ class _ComandState extends State<Comand> {
                           const SizedBox(
                             height: 24,
                           ),
-                          Container(
+                          true ? Container(
                             margin: EdgeInsets.symmetric(
                                 horizontal:
                                     MediaQuery.of(context).size.width * 0.02),
@@ -383,7 +364,7 @@ class _ComandState extends State<Comand> {
                                 ),
                               ],
                             ),
-                          ),
+                          ) : Text('data'),
                           SizedBox(
                             height: 24,
                           ),
@@ -760,6 +741,120 @@ class _ComandState extends State<Comand> {
             return PredGame1();
           },
         ),
+      ),
+    );
+  }
+
+  Widget elemntListComandPlauer() {
+    const stringList = ['Выгнать из команды', 'Сделать командиром'];
+    String selectedMenu = '';
+    final menu = [
+      Text(
+        stringList[0],
+        style: TextStyle(
+          color: Color(0xFF4D1F00),
+          fontFamily: "Inter",
+          fontWeight: FontWeight.w400,
+        ),
+      ),
+      SizedBox(
+        height: 5,
+      ),
+      Text(
+        stringList[1],
+        style: TextStyle(
+          color: Color(0xFF4D1F00),
+          fontFamily: "Inter",
+          fontWeight: FontWeight.w400,
+        ),
+      ),
+    ];
+
+    return TextButton(
+      style: ButtonStyle(
+        elevation: MaterialStateProperty.all(0),
+        padding: MaterialStateProperty.all(EdgeInsets.all(0)),
+      ),
+      onPressed: () {
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => const PersonalAccount()),
+        // );
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+            height: 35,
+            alignment: Alignment.center,
+            child: Text(
+              'Ник участника',
+              style: TextStyle(
+                color: Colors.white,
+                fontFamily: "Inter",
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ),
+          Container(
+            height: 35,
+            alignment: Alignment.center,
+            // decoration: BoxDecoration(
+            //   color: Color.fromARGB(255, 246, 188, 29),
+            //   borderRadius: BorderRadius.circular(8),
+            //   border: Border.all(
+            //     width: 1,
+            //     color: Color.fromARGB(255, 246, 188, 29),
+            //   ),
+            // ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.stars,
+                  color: Color.fromARGB(255, 246, 188, 29),
+                ),
+                Text(
+                  ' рейтинг 100',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700),
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                MenuAnchor(
+                  style: MenuStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all(Color(0xFFF6BD1D)),
+                      padding: MaterialStateProperty.all(EdgeInsets.only(
+                          left: 24, right: 24, top: 12, bottom: 12))),
+                  builder: (BuildContext context, MenuController controller,
+                      Widget? child) {
+                    return IconButton(
+                      splashRadius: 1,
+                      onPressed: () {
+                        if (controller.isOpen) {
+                          controller.close();
+                        } else {
+                          controller.open();
+                        }
+                      },
+                      icon: Image.asset(
+                        'assets/png/menu.png',
+                        scale: 1.5,
+                      ),
+                      tooltip: 'Show menu',
+                    );
+                  },
+                  menuChildren: menu,
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
