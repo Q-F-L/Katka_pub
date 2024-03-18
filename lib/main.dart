@@ -52,11 +52,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 
-//ПОДКЛЮЧИТЬ БД
-//СОЗДАТЬ ТАБЛИЦ
-//АВТОРИЗАЦИЯ (РЕГИСТРАЦИЯ, ВХОД)
-//ВЫВОД ДАННЫХ (самое долгое)
-//СОЗДАНИЕ АДМИНА
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -95,30 +90,166 @@ class Katka extends StatelessWidget {
   }
 }
 
-// class Json extends StatelessWidget {
-//   const Json({super.key});
 
-//   Future<dynamic> jsonLop() async {
-//     final Directory directory = await getApplicationDocumentsDirectory();
-//     File file = File('${directory.path}/assets/json/russia.json');
-//     print(file.uri);
-//     final data = await file.readAsString();
-//     var decoded = jsonDecode(data);
-//     print(decoded);
-//     return decoded;
+
+// class MapScreen extends StatefulWidget {
+//   const MapScreen({super.key});
+
+//   @override
+//   State<MapScreen> createState() => _MapScreenState();
+// }
+
+// class _MapScreenState extends State<MapScreen> {
+//   late final YandexMapController _mapController;
+//   var _mapZoom = 0.0;
+
+//   @override
+//   void dispose() {
+//     _mapController.dispose();
+//     super.dispose();
 //   }
 
 //   @override
 //   Widget build(BuildContext context) {
 //     return Scaffold(
-//         body: FutureBuilder(
-//             future: jsonLop(),
-//             builder: (context, snapshot) {
-//               return Center(
-//                   child: Text(
-//                 '${snapshot.error}',
-//                 style: TextStyle(color: Colors.red),
-//               ));
-//             }));
+//       appBar: AppBar(title: const Text('Yandex Mapkit Demo')),
+//       body: YandexMap(
+//         onMapCreated: (controller) async {
+//           _mapController = controller;
+//           // приближаем вид карты ближе к Европе
+//           await _mapController.moveCamera(
+//             CameraUpdate.newCameraPosition(
+//               const CameraPosition(
+//                 target: Point(
+//                   latitude: 50,
+//                   longitude: 20,
+//                 ),
+//                 zoom: 3,
+//               ),
+//             ),
+//           );
+//         },
+//         onCameraPositionChanged: (cameraPosition, _, __) {
+//           setState(() {
+//             _mapZoom = cameraPosition.zoom;
+//           });
+//         },
+//         mapObjects: [
+//           _getClusterizedCollection(
+//             placemarks: _getPlacemarkObjects(context),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+
+//   /// Метод для получения коллекции кластеризованных маркеров
+//   ClusterizedPlacemarkCollection _getClusterizedCollection({
+//     required List<PlacemarkMapObject> placemarks,
+//   }) {
+//     return ClusterizedPlacemarkCollection(
+//         mapId: const MapObjectId('clusterized-1'),
+//         placemarks: placemarks,
+//         radius: 50,
+//         minZoom: 15,
+//         onClusterAdded: (self, cluster) async {
+//           return cluster.copyWith(
+//             appearance: cluster.appearance.copyWith(
+//               opacity: 1.0,
+//               icon: PlacemarkIcon.single(
+//                 PlacemarkIconStyle(
+//                     image: BitmapDescriptor.fromAssetImage(
+//                         'assets/png/avatar.png')),
+//               ),
+//             ),
+//           );
+//         },
+//         onClusterTap: (self, cluster) async {
+//           await _mapController.moveCamera(
+//             animation: const MapAnimation(
+//                 type: MapAnimationType.linear, duration: 0.3),
+//             CameraUpdate.newCameraPosition(
+//               CameraPosition(
+//                 target: cluster.placemarks.first.point,
+//                 zoom: _mapZoom + 1,
+//               ),
+//             ),
+//           );
+//         });
+//   }
+// }
+
+// /// Метод для генерации точек на карте
+// List<MapPoint> _getMapPoints() {
+//   return [
+//     MapPoint(name: 'Москва', latitude: 55.755864, longitude: 37.617698),
+//     MapPoint(name: 'Лондон', latitude: 51.507351, longitude: -0.127696),
+//     MapPoint(name: 'Рим', latitude: 41.887064, longitude: 12.504809),
+//     MapPoint(name: 'Париж', latitude: 48.856663, longitude: 2.351556),
+//     MapPoint(name: 'Стокгольм', latitude: 59.347360, longitude: 18.341573),
+//   ];
+// }
+
+// class MapPoint {
+//   String? name;
+//   double? latitude;
+//   double? longitude;
+
+//   MapPoint({String? name, double? latitude, double? longitude});
+// }
+
+// /// Метод для генерации объектов маркеров для отображения на карте
+// List<PlacemarkMapObject> _getPlacemarkObjects(BuildContext context) {
+//   print('_getPlacemarkObjects ');
+//   return _getMapPoints().map(
+//     (point) {
+//       return PlacemarkMapObject(
+//         mapId: MapObjectId('MapObject $point'),
+//         point: Point(latitude: 55.755864, longitude: 37.617698),
+//         opacity: 1,
+//         icon: PlacemarkIcon.single(
+//           PlacemarkIconStyle(
+//             image: BitmapDescriptor.fromAssetImage(
+//               'assets/png/avatar.png',
+//             ),
+//             scale: 2,
+//           ),
+//         ),
+//         // onTap: (_, __) => showModalBottomSheet(
+//         //   context: context,
+//         //   builder: (context) => _ModalBodyView(
+//         //     point: point,
+//         //   ),
+//         // ),
+//       );
+//     },
+//   ).toList();
+// }
+
+// /// Содержимое модального окна с информацией о точке на карте
+// class _ModalBodyView extends StatelessWidget {
+//   const _ModalBodyView({required this.point});
+
+//   final MapPoint point;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: const EdgeInsets.symmetric(vertical: 40),
+//       child: Column(
+//         mainAxisSize: MainAxisSize.min,
+//         children: [
+//           Text(point.name ?? '', style: const TextStyle(fontSize: 20)),
+//           const SizedBox(height: 20),
+//           Text(
+//             '${point.latitude}, ${point.longitude}',
+//             style: const TextStyle(
+//               fontSize: 16,
+//               color: Colors.grey,
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
 //   }
 // }
